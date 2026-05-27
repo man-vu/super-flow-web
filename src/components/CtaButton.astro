@@ -2,7 +2,11 @@
 interface Props { href: string; variant?: 'primary' | 'secondary' }
 const { href, variant = 'primary' } = Astro.props
 ---
-<a href={href} class={`cta cta-${variant}`}>
+<a
+  href={href}
+  class={`cta cta-${variant}`}
+  data-magnetic={variant === 'primary' ? '' : undefined}
+>
   <slot />
   <span class="arrow" aria-hidden="true">→</span>
 </a>
@@ -17,7 +21,7 @@ const { href, variant = 'primary' } = Astro.props
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: -0.005em;
-    transition: background 180ms ease, color 180ms ease, transform 100ms ease, box-shadow 180ms ease;
+    transition: background 180ms ease, color 180ms ease, transform 60ms ease, box-shadow 180ms ease;
     border: 1px solid transparent;
     white-space: nowrap;
   }

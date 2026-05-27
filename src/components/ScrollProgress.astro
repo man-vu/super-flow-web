@@ -1,0 +1,41 @@
+---
+/* Sticky 1px scroll-progress bar at top of viewport.
+   Uses CSS scroll-driven animations where supported (Chrome/Edge 115+);
+   falls back to scripts/scroll-progress.ts JS scroll listener otherwise.
+   The script is bundled by motion.ts. */
+---
+<div class="scroll-progress" aria-hidden="true">
+  <span class="scroll-progress-fill"></span>
+</div>
+<style>
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 1000;
+    pointer-events: none;
+    background: transparent;
+  }
+  .scroll-progress-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--lime));
+    transform-origin: 0 0;
+    /* Modern path: scroll-driven animation. JS fallback covers the rest. */
+    animation: scrollFill linear;
+    animation-timeline: scroll(root);
+    animation-range: 0% 100%;
+    transition: width 80ms linear;
+    will-change: width, transform;
+  }
+  @keyframes scrollFill {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+  html[data-motion="reduced"] .scroll-progress-fill {
+    animation: none;
+  }
+</style>

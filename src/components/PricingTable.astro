@@ -25,7 +25,7 @@ const cellClass = (v: string): string =>
     </thead>
     <tbody>
       {rows.map(row => (
-        <tr>
+        <tr data-reveal>
           <td class="feature-cell">{row.feature}</td>
           <td class={cellClass(row.free)}>{row.free === 'yes' ? '+' : row.free}</td>
           <td class={`pro-col ${cellClass(row.pro)}`}>{row.pro === 'yes' ? '+' : row.pro}</td>

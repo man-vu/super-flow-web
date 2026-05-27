@@ -3,7 +3,7 @@ interface Props { title: string; body: string; index: number }
 const { title, body, index } = Astro.props
 const pad = String(index).padStart(2, '0')
 ---
-<div class="card">
+<div class="card" data-reveal data-tilt>
   <div class="num">{pad}</div>
   <h3>{title}</h3>
   {/* body may contain inline HTML (kbd elements), render raw */}

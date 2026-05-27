@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css'
+import '../styles/motion.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import ScrollProgress from '../components/ScrollProgress.astro'
 
 interface Props {
   title: string
@@ -26,10 +28,21 @@ const base = import.meta.env.BASE_URL
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>
+      /* Set motion mode pre-paint so CSS branches before first frame. */
+      document.documentElement.dataset.motion =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+    </script>
   </head>
   <body>
+    <ScrollProgress />
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
     <Header />
     <slot />
     <Footer />
+    <script>
+      import '../scripts/motion'
+    </script>
   </body>
 </html>

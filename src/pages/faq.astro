@@ -56,7 +56,7 @@ const faq = [
     </header>
     <div class="faq-list">
       {faq.map((item, i) => (
-        <details>
+        <details data-reveal>
           <summary>
             <span class="q-num">{String(i + 1).padStart(2, '0')}</span>
             <span class="q-text">{item.q}</span>

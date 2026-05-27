@@ -66,23 +66,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle grid texture across the page — reads as intentional,
-   not the default dark-mode-gradient SaaS look. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-  background-size: 32px 32px;
-  background-position: -1px -1px;
-  mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
-}
-
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: 600;
@@ -174,11 +157,6 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--accent);
   margin-bottom: var(--space-3);
 }
-.eyebrow::before {
-  content: '// ';
-  color: var(--text-tertiary);
-}
-
 /* Tabular numerals everywhere counts or prices appear. */
 .tabular { font-variant-numeric: tabular-nums; }
 
@@ -189,4 +167,3 @@ button { font-family: inherit; cursor: pointer; }
     transition-duration: 0.01ms !important;
   }
 }
-</content>
