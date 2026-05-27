@@ -84,4 +84,51 @@ const cellClass = (v: string): string =>
   }
   td.cell-no { color: var(--text-tertiary); font-family: var(--font-mono); }
   tr:last-child td { border-bottom: none; }
+
+  /* Mobile: collapse the table into a stack of cards. Each row becomes
+     its own block with the feature name as the title and Free/Pro
+     values labeled side-by-side. Avoids the 80px-wide cell crush. */
+  @media (max-width: 640px) {
+    .table-wrap { border-radius: var(--radius-md); }
+    table, thead, tbody, tr, td, th { display: block; }
+    thead { display: none; }
+    tr {
+      padding: var(--space-4);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    tr:last-child { border-bottom: none; }
+    td {
+      padding: 0;
+      border: none;
+      background: transparent !important;
+      color: var(--text);
+    }
+    td.feature-cell {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-3);
+      font-weight: 500;
+    }
+    td:not(.feature-cell) {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+    td:not(.feature-cell)::before {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      margin-right: var(--space-3);
+    }
+    td:nth-of-type(2)::before { content: 'free'; }
+    td.pro-col::before { content: 'pro'; color: var(--accent); }
+  }
 </style>
