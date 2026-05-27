@@ -10,20 +10,23 @@ const nav = [
 <header class="site-header">
   <div class="container header-inner">
     <a href={base} class="brand">
-      <img src={`${base}icon.png`} alt="" width="28" height="28" />
-      <span>Super Flow</span>
+      <img src={`${base}icon.png`} alt="" width="26" height="26" />
+      <span>super-flow</span>
     </a>
     <nav>
       {nav.map(item => <a href={item.href} class="nav-link">{item.label}</a>)}
-      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="download-link">Download</a>
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="download-link">
+        Download
+      </a>
     </nav>
   </div>
 </header>
 <style>
   .site-header {
     border-bottom: 1px solid var(--border);
-    background: rgba(13, 13, 13, 0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -38,31 +41,57 @@ const nav = [
   .brand {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: 10px;
     color: var(--text);
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
     font-weight: 600;
+    letter-spacing: -0.02em;
     min-width: 0;
   }
   .brand:hover { color: var(--text); }
   .brand span { white-space: nowrap; }
+  .brand img { display: block; border-radius: 5px; }
+
   nav { display: flex; align-items: center; gap: var(--space-5); }
-  nav a {
+  .nav-link {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: -0.01em;
+    position: relative;
+    padding: 4px 0;
   }
-  nav a:hover { color: var(--text); }
+  .nav-link:hover { color: var(--text); }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 180ms ease;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+
   .download-link {
-    padding: 6px 14px;
+    padding: 7px 14px;
     background: var(--accent);
     color: #fff !important;
     border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
     white-space: nowrap;
+    transition: background 180ms ease;
   }
-  .download-link:hover { background: var(--accent-hover); }
+  .download-link:hover { background: var(--accent-hover); color: #fff !important; }
+
   /* Mobile: drop the inline text nav (full list lives in the footer);
-     keep only logo + Download CTA so the header stays single-line. */
+     keep logo + Download CTA so the header stays single-line. */
   @media (max-width: 640px) {
     .nav-link { display: none; }
     nav { gap: var(--space-2); }

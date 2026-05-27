@@ -51,12 +51,17 @@ const faq = [
 <Base title="FAQ — Super Flow">
   <main class="container section">
     <header class="page-header">
-      <h1>Frequently asked questions</h1>
+      <span class="eyebrow">faq</span>
+      <h1>Frequently asked questions.</h1>
     </header>
     <div class="faq-list">
-      {faq.map(item => (
+      {faq.map((item, i) => (
         <details>
-          <summary>{item.q}</summary>
+          <summary>
+            <span class="q-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="q-text">{item.q}</span>
+            <span class="q-toggle" aria-hidden="true">+</span>
+          </summary>
           <p>{item.a}</p>
         </details>
       ))}
@@ -65,38 +70,61 @@ const faq = [
 </Base>
 
 <style>
-  .page-header { text-align: center; margin-bottom: var(--space-6); }
+  .page-header { margin-bottom: var(--space-6); max-width: 720px; }
   .faq-list {
-    max-width: 720px;
-    margin: 0 auto;
+    max-width: 760px;
     display: grid;
-    gap: var(--space-3);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
   details {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
     padding: var(--space-4);
+    transition: background 180ms ease;
   }
+  details:hover { background: var(--surface-hover); }
   details[open] { background: var(--surface-hover); }
   summary {
     cursor: pointer;
     color: var(--text);
     font-weight: 500;
     list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
   }
   summary::-webkit-details-marker { display: none; }
-  summary::after {
-    content: '+';
-    float: right;
+  .q-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     color: var(--text-tertiary);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .q-text {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .q-toggle {
+    color: var(--accent);
+    font-family: var(--font-mono);
     font-size: 1.3rem;
     line-height: 1;
+    flex-shrink: 0;
     transition: transform 200ms ease;
   }
-  details[open] summary::after { transform: rotate(45deg); }
+  details[open] .q-toggle { transform: rotate(45deg); }
   details p {
-    margin: var(--space-3) 0 0;
+    margin: var(--space-3) 0 0 calc(2.5ch + var(--space-3));
     color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  @media (max-width: 560px) {
+    details p { margin-left: 0; }
   }
 </style>

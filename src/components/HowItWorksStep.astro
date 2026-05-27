@@ -1,27 +1,35 @@
 ---
 interface Props { number: number; title: string; body: string }
 const { number, title, body } = Astro.props
+const pad = String(number).padStart(2, '0')
 ---
 <div class="step">
-  <div class="num">{number}</div>
+  <div class="num">{pad}</div>
   <h3>{title}</h3>
   <p>{body}</p>
 </div>
 <style>
-  .step { text-align: center; }
-  .num {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin: 0 auto var(--space-3);
+  .step {
+    text-align: left;
+    border-top: 1px solid var(--border-strong);
+    padding-top: var(--space-3);
   }
-  h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
-  p { margin: 0; font-size: 0.94rem; }
+  .num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: var(--space-3);
+    letter-spacing: 0.08em;
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin-bottom: var(--space-2);
+    color: var(--text);
+  }
+  p {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
 </style>

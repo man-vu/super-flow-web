@@ -15,18 +15,20 @@ const faq = [
 <Base title="Pricing — Super Flow">
   <main class="container section">
     <header class="page-header">
-      <h1>Pricing</h1>
-      <p>Start free. Upgrade when you need cloud transcription, polished AI cleanup, or read-aloud.</p>
+      <span class="eyebrow">pricing</span>
+      <h1>Free to start. Pro when you need it.</h1>
+      <p>Upgrade when you want cloud transcription, polished AI cleanup, or read-aloud. Cancel anytime.</p>
     </header>
 
     <PricingTable />
 
     <div class="cta-row">
-      <CtaButton href={downloadHref} icon="⬇">Download free</CtaButton>
+      <CtaButton href={downloadHref}>Download free</CtaButton>
     </div>
 
     <section class="pricing-faq">
-      <h2>Common questions</h2>
+      <span class="eyebrow">common questions</span>
+      <h2>Before you ask.</h2>
       <dl>
         {faq.map(item => (
           <>
@@ -40,18 +42,34 @@ const faq = [
 </Base>
 
 <style>
-  .page-header { text-align: center; margin-bottom: var(--space-5); }
-  .page-header p { max-width: 540px; margin: 0 auto; }
-  .cta-row { display: flex; justify-content: center; margin-top: var(--space-5); }
+  .page-header { margin-bottom: var(--space-5); max-width: 720px; }
+  .page-header p { font-size: 1.05rem; }
+  .cta-row { display: flex; margin-top: var(--space-5); }
   .pricing-faq { margin-top: var(--space-8); }
-  dl { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+  dl {
+    display: grid;
+    gap: 1px;
+    margin-top: var(--space-4);
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
   dt {
+    background: var(--surface);
+    padding: var(--space-4) var(--space-4) var(--space-2);
     font-weight: 600;
     color: var(--text);
-    font-size: 1.05rem;
+    font-size: 1rem;
+    font-family: var(--font-mono);
+    letter-spacing: -0.01em;
   }
   dd {
-    margin: var(--space-1) 0 0;
+    background: var(--surface);
+    margin: 0;
+    padding: 0 var(--space-4) var(--space-4);
     color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 </style>

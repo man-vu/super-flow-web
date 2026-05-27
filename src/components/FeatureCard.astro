@@ -1,31 +1,37 @@
 ---
-interface Props { title: string; body: string; icon: string }
-const { title, body, icon } = Astro.props
+interface Props { title: string; body: string; index: number }
+const { title, body, index } = Astro.props
+const pad = String(index).padStart(2, '0')
 ---
 <div class="card">
-  <div class="icon">{icon}</div>
+  <div class="num">{pad}</div>
   <h3>{title}</h3>
-  <p>{body}</p>
+  {/* body may contain inline HTML (kbd elements), render raw */}
+  <p set:html={body}></p>
 </div>
 <style>
   .card {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5);
+    padding: var(--space-5) var(--space-5) var(--space-5);
+    transition: background 200ms ease;
   }
-  .icon {
-    font-size: 1.6rem;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(99, 102, 241, 0.12);
-    color: var(--accent);
-    border-radius: var(--radius-md);
+  .card:hover { background: var(--surface-hover); }
+  .num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-3);
+    letter-spacing: 0.05em;
   }
-  h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
-  p { margin: 0; font-size: 0.94rem; }
+  h3 {
+    font-size: 1.05rem;
+    margin-bottom: var(--space-2);
+    color: var(--text);
+  }
+  p {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
 </style>

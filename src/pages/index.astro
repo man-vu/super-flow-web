@@ -8,57 +8,69 @@ const base = import.meta.env.BASE_URL
 const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
 
 const features = [
-  { icon: '⌨', title: 'F9 to dictate',     body: 'Tap F9 in any text field — the system types what you say.' },
-  { icon: '✨', title: 'Polish hotkey',    body: 'Select messy text, press Ctrl+Shift+P, get clean prose back in place.' },
-  { icon: '⚡', title: 'Voice snippets',   body: 'Say a trigger phrase, get a full email signature, address, or boilerplate.' },
-  { icon: '📖', title: 'Custom dictionary', body: 'Teach Super Flow your jargon, names, and acronyms once.' },
-  { icon: '🛡', title: 'Local or cloud',   body: 'Whisper runs offline; Deepgram + GPT-4o-mini for cloud speed when you want it.' },
-  { icon: '⟨⟩', title: 'IDE-aware',         body: 'Speaks code: camelCase, snake_case, and your active file context.' },
+  { title: 'F9 to dictate',     body: 'Tap <kbd>F9</kbd> in any text field — the system types what you say.' },
+  { title: 'Polish hotkey',     body: 'Select messy text, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>, get clean prose back in place.' },
+  { title: 'Voice snippets',    body: 'Say a trigger phrase, get a full email signature, address, or boilerplate.' },
+  { title: 'Custom dictionary', body: 'Teach Super Flow your jargon, names, and acronyms once.' },
+  { title: 'Local or cloud',    body: 'Whisper runs offline; Deepgram + GPT-4o-mini when you want cloud speed.' },
+  { title: 'IDE-aware',         body: 'Speaks code: camelCase, snake_case, and your active file context.' },
 ]
 
 const steps = [
-  { number: 1, title: 'Install Super Flow',    body: 'Download the Windows installer. ~70 MB, signed.' },
-  { number: 2, title: 'Press F9 anywhere',     body: 'Code editor, email, browser, chat — wherever there is a text field.' },
-  { number: 3, title: 'Speak naturally',       body: 'Filler words removed, grammar fixed, punctuation added. Text appears polished.' },
+  { number: 1, title: 'Install Super Flow', body: 'Download the Windows installer. ~70 MB, signed.' },
+  { number: 2, title: 'Press F9 anywhere',  body: 'Code editor, email, browser, chat — wherever there is a text field.' },
+  { number: 3, title: 'Speak naturally',    body: 'Filler removed, grammar fixed, punctuation added. Polished text appears in place.' },
 ]
 ---
 <Base title="Super Flow — Dictate anywhere on Windows">
   <main>
     <!-- HERO -->
     <section class="container hero">
-      <h1>Dictate anywhere on Windows.<br /><span class="accent">Polished by AI.</span></h1>
+      <div class="hero-prompt"><span class="prompt-marker">$</span> super-flow start</div>
+      <h1>
+        Dictate anywhere<br />
+        on Windows.<br />
+        <span class="hero-h1-accent">Polished by AI.</span>
+      </h1>
       <p class="hero-tag">
-        Press F9 in any text field. Speak naturally. Super Flow removes filler, fixes grammar, and types the polished result.
+        Press <kbd>F9</kbd> in any text field. Speak naturally. Super Flow
+        removes filler, fixes grammar, and types the polished result.
       </p>
       <div class="hero-cta">
-        <CtaButton href={downloadHref} icon="⬇">Download for Windows</CtaButton>
+        <CtaButton href={downloadHref}>Download for Windows</CtaButton>
         <CtaButton href="#how" variant="secondary">See how it works</CtaButton>
+      </div>
+      <div class="hero-meta">
+        Windows 10 &amp; 11 · 70 MB · Signed installer
       </div>
     </section>
 
     <!-- FEATURES -->
     <section class="container section">
-      <h2>What it does</h2>
+      <span class="eyebrow">what it does</span>
+      <h2>Six things, done well.</h2>
       <div class="features-grid">
-        {features.map(f => <FeatureCard {...f} />)}
+        {features.map((f, i) => <FeatureCard index={i + 1} title={f.title} body={f.body} />)}
       </div>
     </section>
 
     <!-- HOW IT WORKS -->
     <section id="how" class="container section">
-      <h2>How it works</h2>
+      <span class="eyebrow">how it works</span>
+      <h2>Three steps to never typing again.</h2>
       <div class="steps-grid">
-        {steps.map(s => <HowItWorksStep {...s} />)}
+        {steps.map(s => <HowItWorksStep number={s.number} title={s.title} body={s.body} />)}
       </div>
     </section>
 
     <!-- PRICING TEASER -->
     <section class="container section">
+      <span class="eyebrow">pricing</span>
       <h2>Free to start. Pro when you need it.</h2>
       <div class="pricing-teaser">
         <div class="plan">
-          <h3>Free</h3>
-          <p class="plan-price">$0 <span>/ forever</span></p>
+          <div class="plan-name">Free</div>
+          <p class="plan-price tabular"><span class="dollar">$</span>0 <span class="cycle">/ forever</span></p>
           <ul>
             <li>2,000 dictated words per week</li>
             <li>Local Whisper transcription</li>
@@ -67,8 +79,8 @@ const steps = [
           </ul>
         </div>
         <div class="plan plan-featured">
-          <h3>Pro</h3>
-          <p class="plan-price">$15 <span>/ month</span></p>
+          <div class="plan-name plan-name-pro">Pro</div>
+          <p class="plan-price tabular"><span class="dollar">$</span>15 <span class="cycle">/ month</span></p>
           <ul>
             <li>Unlimited words</li>
             <li>Deepgram cloud + GPT-4o-mini cleanup</li>
@@ -83,49 +95,82 @@ const steps = [
     <!-- FINAL CTA -->
     <section class="container section final-cta">
       <h2>Ready to stop typing?</h2>
-      <CtaButton href={downloadHref} icon="⬇">Download Super Flow</CtaButton>
+      <p>Free forever. No credit card. Upgrade later if you want unlimited.</p>
+      <CtaButton href={downloadHref}>Download Super Flow</CtaButton>
     </section>
   </main>
 </Base>
 
 <style>
+  /* HERO — left-aligned, terminal-prompt eyebrow, big mono headline */
   .hero {
     padding: var(--space-8) 0 var(--space-7);
-    text-align: center;
+    max-width: 880px;
   }
-  .hero h1 { margin-bottom: var(--space-4); }
-  .accent { color: var(--accent); }
+  .hero-prompt {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--lime);
+    margin-bottom: var(--space-5);
+    letter-spacing: 0.02em;
+  }
+  .hero-prompt .prompt-marker { color: var(--text-tertiary); margin-right: 8px; }
+  .hero h1 { margin-bottom: var(--space-5); }
+  .hero-h1-accent { color: var(--accent); }
   .hero-tag {
-    font-size: 1.15rem;
-    max-width: 640px;
-    margin: 0 auto var(--space-5);
+    font-size: 1.1rem;
+    max-width: 620px;
+    margin: 0 0 var(--space-6);
     color: var(--text-secondary);
+    line-height: 1.55;
   }
   .hero-cta {
     display: flex;
     gap: var(--space-3);
-    justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: var(--space-5);
   }
+  .hero-meta {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  /* FEATURES — sharp-cornered, numbered cards */
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--space-4);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
     margin-top: var(--space-5);
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+
+  /* STEPS */
   .steps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-5);
     margin-top: var(--space-5);
   }
-  @media (max-width: 640px) {
+  @media (max-width: 700px) {
     .steps-grid { grid-template-columns: 1fr; }
   }
+
+  /* PRICING TEASER */
   .pricing-teaser {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    gap: var(--space-3);
     margin-top: var(--space-5);
   }
   @media (max-width: 640px) {
@@ -134,27 +179,95 @@ const steps = [
   .plan {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: var(--space-5);
   }
   .plan-featured {
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface) 100%);
+    position: relative;
   }
-  .plan h3 { font-size: 1.3rem; margin-bottom: var(--space-2); }
+  .plan-featured::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    padding: 1px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  .plan-name {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-3);
+  }
+  .plan-name-pro { color: var(--accent); }
   .plan-price {
-    font-size: 2rem;
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
     font-weight: 600;
     color: var(--text);
     margin: 0 0 var(--space-3);
+    line-height: 1;
+    letter-spacing: -0.03em;
   }
-  .plan-price span {
-    font-size: 0.92rem;
+  .plan-price .dollar {
+    font-size: 1.4rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    vertical-align: 8px;
+    margin-right: 2px;
+  }
+  .plan-price .cycle {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-tertiary);
+    letter-spacing: 0;
   }
-  .plan ul { padding-left: 1.1rem; color: var(--text-secondary); }
-  .plan li { margin-bottom: var(--space-1); }
-  .pricing-link { text-align: center; margin-top: var(--space-4); }
-  .final-cta { text-align: center; padding-bottom: var(--space-8); }
+  .plan ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    color: var(--text-secondary);
+  }
+  .plan li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    font-size: 0.95rem;
+  }
+  .plan li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--lime);
+    font-family: var(--font-mono);
+    font-weight: 600;
+  }
+  .pricing-link {
+    text-align: left;
+    margin-top: var(--space-4);
+  }
+  .pricing-link a {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--accent);
+  }
+  .pricing-link a:hover { color: var(--accent-hover); }
+
+  /* FINAL CTA */
+  .final-cta {
+    text-align: left;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-7);
+    padding: var(--space-8) 0;
+  }
+  .final-cta p { margin-bottom: var(--space-5); max-width: 480px; }
 </style>
