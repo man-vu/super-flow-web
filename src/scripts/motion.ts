@@ -16,8 +16,13 @@ if (mode === 'full') {
     import('./tilt').then(m => m.initTilt()),
     import('./magnetic').then(m => m.initMagnetic()),
     import('./counters').then(m => m.initCounters()),
+    import('./header').then(m => m.initHeader()),
+    import('./kbd-pulse').then(m => m.initKbdPulse()),
   ])
 } else {
   /* Reduced mode: still apply final values so numbers don't show 0. */
-  void import('./counters').then(m => m.applyFinalValues())
+  void Promise.all([
+    import('./counters').then(m => m.applyFinalValues()),
+    import('./header').then(m => m.initHeader()),
+  ])
 }
