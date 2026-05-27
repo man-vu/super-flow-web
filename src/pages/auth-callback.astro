@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro'
+import BouncerScript from '../components/BouncerScript.tsx'
+---
+<Base title="Signed in — Super Flow">
+  <main class="bouncer-wrap">
+    <div class="card">
+      <div class="checkmark" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <h1>You're signed in to Super Flow</h1>
+      <p>Returning you to the app…</p>
+      <p class="hint">If nothing happens, you can close this tab manually.</p>
+      <BouncerScript client:load />
+    </div>
+  </main>
+</Base>
+
+<style>
+  .bouncer-wrap {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5);
+  }
+  .card {
+    max-width: 420px;
+    padding: var(--space-6) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+  .checkmark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-4);
+  }
+  .card h1 { font-size: 1.35rem; margin-bottom: var(--space-2); }
+  .card p { margin: 0 0 var(--space-2); }
+  .hint { font-size: 0.82rem; color: var(--text-tertiary); margin-top: var(--space-4); }
+</style>
