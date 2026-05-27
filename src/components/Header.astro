@@ -14,7 +14,7 @@ const nav = [
       <span>Super Flow</span>
     </a>
     <nav>
-      {nav.map(item => <a href={item.href}>{item.label}</a>)}
+      {nav.map(item => <a href={item.href} class="nav-link">{item.label}</a>)}
       <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="download-link">Download</a>
     </nav>
   </div>
@@ -43,8 +43,10 @@ const nav = [
     font-family: var(--font-heading);
     font-size: 1.15rem;
     font-weight: 600;
+    min-width: 0;
   }
   .brand:hover { color: var(--text); }
+  .brand span { white-space: nowrap; }
   nav { display: flex; align-items: center; gap: var(--space-5); }
   nav a {
     color: var(--text-secondary);
@@ -56,9 +58,13 @@ const nav = [
     background: var(--accent);
     color: #fff !important;
     border-radius: var(--radius-md);
+    white-space: nowrap;
   }
   .download-link:hover { background: var(--accent-hover); }
+  /* Mobile: drop the inline text nav (full list lives in the footer);
+     keep only logo + Download CTA so the header stays single-line. */
   @media (max-width: 640px) {
-    nav { gap: var(--space-3); font-size: 0.85rem; }
+    .nav-link { display: none; }
+    nav { gap: var(--space-2); }
   }
 </style>
