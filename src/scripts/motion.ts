@@ -15,5 +15,9 @@ if (mode === 'full') {
     import('./reveal').then(m => m.initReveal()),
     import('./tilt').then(m => m.initTilt()),
     import('./magnetic').then(m => m.initMagnetic()),
+    import('./counters').then(m => m.initCounters()),
   ])
+} else {
+  /* Reduced mode: still apply final values so numbers don't show 0. */
+  void import('./counters').then(m => m.applyFinalValues())
 }

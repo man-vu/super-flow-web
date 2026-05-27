@@ -1,0 +1,66 @@
+---
+/* Three stat counters. Numbers chosen to be provable from product spec —
+   no invented metrics. Final values are encoded in data-counter and animated
+   by scripts/counters.ts when the strip scrolls into view. */
+
+const stats = [
+  { value: 2000,  suffix: '+',  label: 'words / week on the free tier' },
+  { value: 1,     suffix: 's',  label: 'typical hotkey-to-text latency', prefix: '<' },
+  { value: 100,   suffix: '%',  label: 'local on the free tier' },
+]
+---
+<section class="container stats-strip" aria-label="Super Flow at a glance">
+  <div class="stats-grid">
+    {stats.map(s => (
+      <div class="stat" data-reveal>
+        <div class="stat-value">
+          {s.prefix && <span class="stat-prefix">{s.prefix}</span>}
+          <span data-counter={String(s.value)} data-counter-suffix={s.suffix} aria-label={`${s.prefix ?? ''}${s.value}${s.suffix}`}>
+            0{s.suffix}
+          </span>
+        </div>
+        <div class="stat-label">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</section>
+<style>
+  .stats-strip {
+    padding: var(--space-6) 0;
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+  .stat { text-align: left; }
+  .stat-value {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-2);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .stat-prefix {
+    color: var(--text-tertiary);
+    font-size: 0.7em;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+</style>

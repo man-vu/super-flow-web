@@ -4,6 +4,7 @@ import FeatureCard from '../components/FeatureCard.astro'
 import HowItWorksStep from '../components/HowItWorksStep.astro'
 import CtaButton from '../components/CtaButton.astro'
 import HeroWaveform from '../components/HeroWaveform.astro'
+import StatsStrip from '../components/StatsStrip.astro'
 
 const base = import.meta.env.BASE_URL
 const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
@@ -47,6 +48,8 @@ const steps = [
         </div>
       </div>
     </section>
+
+    <StatsStrip />
 
     <!-- FEATURES -->
     <section class="container section">
