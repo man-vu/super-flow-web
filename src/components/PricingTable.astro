@@ -1,0 +1,56 @@
+---
+const rows = [
+  { feature: 'Words per week',                free: '2,000',          pro: 'Unlimited' },
+  { feature: 'Transcription engine',          free: 'Local Whisper',  pro: 'Deepgram cloud + Whisper fallback' },
+  { feature: 'Text cleanup',                  free: 'Rule-based',     pro: 'GPT-4o-mini style transfer' },
+  { feature: 'Custom dictionary + snippets',  free: '✓',              pro: '✓' },
+  { feature: 'Voice snippets',                free: '✓',              pro: '✓' },
+  { feature: 'IDE-aware coding mode',         free: '✓',              pro: '✓' },
+  { feature: 'ElevenLabs / Piper read-aloud', free: '—',              pro: '✓' },
+  { feature: 'Polish hotkey (Ctrl+Shift+P)',  free: '—',              pro: '✓' },
+  { feature: 'Priority support',              free: '—',              pro: '✓' },
+]
+---
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Free</th>
+      <th class="pro-col">Pro <span>$15/mo</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map(row => (
+      <tr>
+        <td class="feature-cell">{row.feature}</td>
+        <td>{row.free}</td>
+        <td class="pro-col">{row.pro}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-5);
+  }
+  th, td {
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-size: 0.92rem; color: var(--text-secondary); font-weight: 500; }
+  th.pro-col, td.pro-col {
+    background: rgba(99, 102, 241, 0.06);
+    color: var(--text);
+  }
+  th.pro-col span {
+    color: var(--text-tertiary);
+    font-weight: 400;
+    margin-left: 6px;
+    font-size: 0.85rem;
+  }
+  td.feature-cell { color: var(--text); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+</style>

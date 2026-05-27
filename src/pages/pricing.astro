@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro'
+import PricingTable from '../components/PricingTable.astro'
+import CtaButton from '../components/CtaButton.astro'
+
+const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
+
+const faq = [
+  { q: 'Can I cancel any time?',           a: 'Yes. Pro is month-to-month. Cancel from your billing portal and you keep Pro features until the end of your current period.' },
+  { q: 'Do you offer refunds?',            a: 'Within 14 days of upgrading, email us and we will refund your most recent payment, no questions.' },
+  { q: 'What payment methods?',            a: 'All major credit and debit cards via Stripe. We never see or store your card details.' },
+  { q: 'Is there a team plan?',            a: 'Not yet. If you need 5+ seats for your team, write to us and we will work something out.' },
+]
+---
+<Base title="Pricing — Super Flow">
+  <main class="container section">
+    <header class="page-header">
+      <h1>Pricing</h1>
+      <p>Start free. Upgrade when you need cloud transcription, polished AI cleanup, or read-aloud.</p>
+    </header>
+
+    <PricingTable />
+
+    <div class="cta-row">
+      <CtaButton href={downloadHref} icon="⬇">Download free</CtaButton>
+    </div>
+
+    <section class="pricing-faq">
+      <h2>Common questions</h2>
+      <dl>
+        {faq.map(item => (
+          <>
+            <dt>{item.q}</dt>
+            <dd>{item.a}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .page-header { text-align: center; margin-bottom: var(--space-5); }
+  .page-header p { max-width: 540px; margin: 0 auto; }
+  .cta-row { display: flex; justify-content: center; margin-top: var(--space-5); }
+  .pricing-faq { margin-top: var(--space-8); }
+  dl { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+  dt {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 1.05rem;
+  }
+  dd {
+    margin: var(--space-1) 0 0;
+    color: var(--text-secondary);
+  }
+</style>
