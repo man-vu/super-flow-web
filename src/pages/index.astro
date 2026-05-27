@@ -6,23 +6,55 @@ import CtaButton from '../components/CtaButton.astro'
 import HeroWaveform from '../components/HeroWaveform.astro'
 import StatsStrip from '../components/StatsStrip.astro'
 import MarqueeApps from '../components/MarqueeApps.astro'
+import PersonaCard from '../components/PersonaCard.astro'
 
 const base = import.meta.env.BASE_URL
 const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
 
 const features = [
-  { title: 'F9 to dictate',     body: 'Tap <kbd>F9</kbd> in any text field — the system types what you say.' },
+  { title: 'F9 to dictate',     body: 'Tap <kbd>F9</kbd> in any text field — email, Slack, doc, browser — and the system types what you say.' },
   { title: 'Polish hotkey',     body: 'Select messy text, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>, get clean prose back in place.' },
   { title: 'Voice snippets',    body: 'Say a trigger phrase, get a full email signature, address, or boilerplate.' },
   { title: 'Custom dictionary', body: 'Teach Super Flow your jargon, names, and acronyms once.' },
   { title: 'Local or cloud',    body: 'Whisper runs offline; Deepgram + GPT-4o-mini when you want cloud speed.' },
-  { title: 'IDE-aware',         body: 'Speaks code: camelCase, snake_case, and your active file context.' },
+  { title: 'IDE-aware coding',  body: 'When the cursor is in code, Super Flow speaks camelCase, snake_case, and your file context.' },
 ]
 
 const steps = [
   { number: 1, title: 'Install Super Flow', body: 'Download the Windows installer. ~70 MB, signed.' },
   { number: 2, title: 'Press F9 anywhere',  body: 'Code editor, email, browser, chat — wherever there is a text field.' },
   { number: 3, title: 'Speak naturally',    body: 'Filler removed, grammar fixed, punctuation added. Polished text appears in place.' },
+]
+
+const personas = [
+  {
+    icon: 'pen',
+    label: 'Writers',
+    useCase: 'Drafting long-form posts and essays.',
+    before: 'so basically what im saying is like um the whole point of this is that you can just talk instead of typing right',
+    after: 'The point is simple: you talk instead of typing.',
+  },
+  {
+    icon: 'headset',
+    label: 'Support leads',
+    useCase: 'Replying to tickets without RSI by 4pm.',
+    before: 'hi sorry for the delay um can you try restarting and then like let me know if that helps',
+    after: 'Sorry for the delay. Could you try restarting and let me know if that helps?',
+  },
+  {
+    icon: 'book',
+    label: 'Students',
+    useCase: 'Taking notes faster than they can be lectured.',
+    before: 'so the thing about the krebs cycle is its like a loop and it takes acetyl coa and turns it into co2 i think',
+    after: 'The Krebs cycle is a loop: it takes acetyl-CoA and turns it into CO₂.',
+  },
+  {
+    icon: 'code',
+    label: 'Developers',
+    useCase: 'Dictating PR descriptions, commits, and code comments.',
+    before: 'this pr adds the new auth flow plus a couple bug fixes also fixes the thing with the dropdown',
+    after: 'This PR adds the new auth flow and fixes the dropdown bug.',
+  },
 ]
 ---
 <Base title="Super Flow — Dictate anywhere on Windows">
@@ -31,14 +63,15 @@ const steps = [
     <section class="container hero">
       <HeroWaveform />
       <div class="hero-content">
+        <div class="hero-kicker">for anyone who types</div>
         <h1>
-          Dictate anywhere<br />
-          on Windows.<br />
-          <span class="hero-h1-accent">Polished by AI.</span>
+          Speak.<br />
+          <span class="hero-h1-accent">We'll polish.</span>
         </h1>
         <p class="hero-tag">
-          Press <kbd>F9</kbd> in any text field. Speak naturally. Super Flow
-          removes filler, fixes grammar, and types the polished result.
+          Press <kbd>F9</kbd> in any text field — email, doc, chat, code.
+          Super Flow removes the <em>ums</em>, fixes the grammar, and types
+          the clean version into whatever app you are focused on.
         </p>
         <div class="hero-cta">
           <CtaButton href={downloadHref}>Download for Windows</CtaButton>
@@ -69,6 +102,23 @@ const steps = [
       <h2>Three steps to never typing again.</h2>
       <div class="steps-grid">
         {steps.map(s => <HowItWorksStep number={s.number} title={s.title} body={s.body} />)}
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section class="container section">
+      <span class="eyebrow">who uses it</span>
+      <h2>Not just for developers.</h2>
+      <div class="personas-grid">
+        {personas.map(p => (
+          <PersonaCard
+            icon={p.icon}
+            label={p.label}
+            useCase={p.useCase}
+            before={p.before}
+            after={p.after}
+          />
+        ))}
       </div>
     </section>
 
@@ -121,6 +171,19 @@ const steps = [
     position: relative;
     z-index: 1;
   }
+  .hero-kicker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--lime);
+    margin-bottom: var(--space-4);
+    padding: 4px 10px;
+    border: 1px solid var(--lime-soft);
+    background: var(--lime-soft);
+    border-radius: var(--radius-sm);
+  }
   .hero h1 { margin-bottom: var(--space-5); }
   .hero-h1-accent { color: var(--accent); }
   .hero-tag {
@@ -170,6 +233,17 @@ const steps = [
   }
   @media (max-width: 700px) {
     .steps-grid { grid-template-columns: 1fr; }
+  }
+
+  /* PERSONAS — 2x2 grid that collapses to single column on mobile. */
+  .personas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+  @media (max-width: 700px) {
+    .personas-grid { grid-template-columns: 1fr; }
   }
 
   /* PRICING TEASER */
