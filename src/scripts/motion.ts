@@ -13,5 +13,7 @@ document.documentElement.dataset.motion = mode
 if (mode === 'full') {
   void Promise.all([
     import('./reveal').then(m => m.initReveal()),
+    import('./tilt').then(m => m.initTilt()),
+    import('./magnetic').then(m => m.initMagnetic()),
   ])
 }
