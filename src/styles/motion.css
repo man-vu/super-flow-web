@@ -1,0 +1,35 @@
+/* ---------------------------------------------------------------
+   Motion + visual effects. Loaded by Base.astro.
+
+   Layer order:
+     - body::before — animated mesh gradient (z-index: -2)
+     - body::after  — page noise / depth layer (z-index: -1, currently unused)
+     - content      — z-index: auto
+   --------------------------------------------------------------- */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: -10%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(40vw 40vw at 20% 20%, rgba(99, 102, 241, 0.18) 0%, transparent 60%),
+    radial-gradient(45vw 45vw at 80% 30%, rgba(163, 230, 53, 0.12) 0%, transparent 65%),
+    radial-gradient(50vw 50vw at 50% 90%, rgba(251, 191, 36, 0.08) 0%, transparent 60%);
+  filter: blur(40px) saturate(120%);
+  animation: meshDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes meshDrift {
+  0%   { transform: translate3d(0, 0, 0)       rotate(0deg); }
+  50%  { transform: translate3d(-3%, 2%, 0)    rotate(2deg); }
+  100% { transform: translate3d(2%, -3%, 0)    rotate(-2deg); }
+}
+
+/* Reduced-motion: freeze mesh in its rest position, no keyframe loop. */
+html[data-motion="reduced"] body::before {
+  animation: none;
+  transform: none;
+}
