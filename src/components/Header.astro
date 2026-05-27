@@ -1,0 +1,64 @@
+---
+const base = import.meta.env.BASE_URL
+const nav = [
+  { href: `${base}`, label: 'Home' },
+  { href: `${base}pricing/`, label: 'Pricing' },
+  { href: `${base}faq/`, label: 'FAQ' },
+  { href: `${base}about/`, label: 'About' },
+]
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href={base} class="brand">
+      <img src={`${base}icon.png`} alt="" width="28" height="28" />
+      <span>Super Flow</span>
+    </a>
+    <nav>
+      {nav.map(item => <a href={item.href}>{item.label}</a>)}
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="download-link">Download</a>
+    </nav>
+  </div>
+</header>
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text);
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .brand:hover { color: var(--text); }
+  nav { display: flex; align-items: center; gap: var(--space-5); }
+  nav a {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+  nav a:hover { color: var(--text); }
+  .download-link {
+    padding: 6px 14px;
+    background: var(--accent);
+    color: #fff !important;
+    border-radius: var(--radius-md);
+  }
+  .download-link:hover { background: var(--accent-hover); }
+  @media (max-width: 640px) {
+    nav { gap: var(--space-3); font-size: 0.85rem; }
+  }
+</style>
