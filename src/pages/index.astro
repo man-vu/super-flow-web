@@ -5,6 +5,7 @@ import HowItWorksStep from '../components/HowItWorksStep.astro'
 import CtaButton from '../components/CtaButton.astro'
 import HeroWaveform from '../components/HeroWaveform.astro'
 import StatsStrip from '../components/StatsStrip.astro'
+import MarqueeApps from '../components/MarqueeApps.astro'
 
 const base = import.meta.env.BASE_URL
 const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
@@ -50,6 +51,8 @@ const steps = [
     </section>
 
     <StatsStrip />
+
+    <MarqueeApps />
 
     <!-- FEATURES -->
     <section class="container section">
