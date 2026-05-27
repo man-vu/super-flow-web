@@ -1,0 +1,45 @@
+---
+layout: ../layouts/Base.astro
+title: Privacy Policy — Super Flow
+---
+
+<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 16px; border-radius: 10px; margin-bottom: 32px;">
+  <strong>⚠ Placeholder copy.</strong> Replace with reviewed legal text before public launch.
+</div>
+
+# Privacy Policy
+
+_Last updated: 2026-05-27_
+
+## What we collect
+
+- **Account data:** email address (for sign-in) and Stripe customer ID (for paid users).
+- **Local data:** transcripts, dictionary entries, snippets, and settings stay on your machine in a SQLite database. We never sync them to a server.
+- **Audio:** Free tier transcription runs locally — audio never leaves your device. Pro tier streams audio to Deepgram for transcription; the audio is processed in-flight and not stored by us.
+
+## How we use it
+
+- Authenticate you and enforce your subscription tier.
+- Process payments via Stripe.
+- Operate cloud transcription and cleanup (Pro only).
+
+## Third parties
+
+We share data with these providers only as needed to deliver the service:
+
+- **Supabase** — authentication, user profile, subscription state.
+- **Stripe** — payments and billing.
+- **Google OAuth** — sign-in (if you choose Google).
+- **Deepgram** — cloud transcription (Pro only).
+- **OpenAI** — text cleanup (Pro only).
+- **ElevenLabs** — read-aloud (Pro only, optional).
+
+## Your rights
+
+- Export everything: Settings → Data and Privacy → Export.
+- Delete everything: Settings → Account → Delete account.
+- Email us to request hard-deletion from any third-party providers.
+
+## Contact
+
+<a href="mailto:hello@superflow.app">hello@superflow.app</a>

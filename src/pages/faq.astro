@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro'
+
+const faq = [
+  {
+    q: 'What is Super Flow?',
+    a: 'A voice-to-text dictation app for Windows. Press F9 in any text field, speak, and Super Flow types polished text — filler words removed, grammar fixed, punctuation added.'
+  },
+  {
+    q: 'Which operating systems are supported?',
+    a: 'Windows 10 and 11 today. macOS is on the roadmap.'
+  },
+  {
+    q: 'Which hotkey triggers dictation?',
+    a: 'F9 by default. You can change it to any function key or modifier chord in Settings → General.'
+  },
+  {
+    q: 'Does my voice leave my machine?',
+    a: 'On the Free tier with Whisper, no — all transcription runs locally. On Pro with Deepgram, audio streams to Deepgram and OpenAI for transcription and cleanup. We never log or store your audio.'
+  },
+  {
+    q: 'What is the difference between Free and Pro?',
+    a: 'Free gives you 2,000 words/week with local Whisper + rule-based cleanup. Pro adds Deepgram streaming, GPT-4o-mini style transfer, ElevenLabs read-aloud, and unlimited words for $15/month.'
+  },
+  {
+    q: 'Can I use my own OpenAI or Deepgram API keys?',
+    a: 'Yes. Settings → General → Advanced lets you provide your own keys instead of using the Pro-included infrastructure.'
+  },
+  {
+    q: 'How do I cancel my Pro subscription?',
+    a: 'From your Stripe billing portal, accessible inside the app under Settings → Account → Billing. Pro features stay active until the end of your current paid period.'
+  },
+  {
+    q: 'Is there a refund policy?',
+    a: 'Yes. Within 14 days of upgrading, email us and we will refund your most recent payment in full.'
+  },
+  {
+    q: 'Where is my data stored?',
+    a: 'Locally in a SQLite file at %APPDATA%/Super Flow/super-flow.db. Your transcripts, dictionary, snippets, and settings never sync to a server.'
+  },
+  {
+    q: 'Does it work offline?',
+    a: 'Yes, with the Whisper transcription engine and rule-based cleanup. Cloud features (Deepgram, GPT-4o-mini, ElevenLabs) require an internet connection.'
+  },
+  {
+    q: 'How do I report a bug?',
+    a: 'Open an issue at github.com/man-vu/super-flow-releases or email us — both routes are monitored daily.'
+  },
+]
+---
+<Base title="FAQ — Super Flow">
+  <main class="container section">
+    <header class="page-header">
+      <h1>Frequently asked questions</h1>
+    </header>
+    <div class="faq-list">
+      {faq.map(item => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </main>
+</Base>
+
+<style>
+  .page-header { text-align: center; margin-bottom: var(--space-6); }
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+    display: grid;
+    gap: var(--space-3);
+  }
+  details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+  details[open] { background: var(--surface-hover); }
+  summary {
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 500;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+';
+    float: right;
+    color: var(--text-tertiary);
+    font-size: 1.3rem;
+    line-height: 1;
+    transition: transform 200ms ease;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p {
+    margin: var(--space-3) 0 0;
+    color: var(--text-secondary);
+  }
+</style>
