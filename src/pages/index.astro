@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro'
 import FeatureCard from '../components/FeatureCard.astro'
 import HowItWorksStep from '../components/HowItWorksStep.astro'
 import CtaButton from '../components/CtaButton.astro'
+import HeroWaveform from '../components/HeroWaveform.astro'
 
 const base = import.meta.env.BASE_URL
 const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
@@ -26,21 +27,24 @@ const steps = [
   <main>
     <!-- HERO -->
     <section class="container hero">
-      <h1>
-        Dictate anywhere<br />
-        on Windows.<br />
-        <span class="hero-h1-accent">Polished by AI.</span>
-      </h1>
-      <p class="hero-tag">
-        Press <kbd>F9</kbd> in any text field. Speak naturally. Super Flow
-        removes filler, fixes grammar, and types the polished result.
-      </p>
-      <div class="hero-cta">
-        <CtaButton href={downloadHref}>Download for Windows</CtaButton>
-        <CtaButton href="#how" variant="secondary">See how it works</CtaButton>
-      </div>
-      <div class="hero-meta">
-        Windows 10 &amp; 11 · 70 MB · Signed installer
+      <HeroWaveform />
+      <div class="hero-content">
+        <h1>
+          Dictate anywhere<br />
+          on Windows.<br />
+          <span class="hero-h1-accent">Polished by AI.</span>
+        </h1>
+        <p class="hero-tag">
+          Press <kbd>F9</kbd> in any text field. Speak naturally. Super Flow
+          removes filler, fixes grammar, and types the polished result.
+        </p>
+        <div class="hero-cta">
+          <CtaButton href={downloadHref}>Download for Windows</CtaButton>
+          <CtaButton href="#how" variant="secondary">See how it works</CtaButton>
+        </div>
+        <div class="hero-meta">
+          Windows 10 &amp; 11 · 70 MB · Signed installer
+        </div>
       </div>
     </section>
 
@@ -103,8 +107,13 @@ const steps = [
 <style>
   /* HERO — left-aligned, terminal-prompt eyebrow, big mono headline */
   .hero {
+    position: relative;
     padding: var(--space-8) 0 var(--space-7);
     max-width: 880px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
   }
   .hero h1 { margin-bottom: var(--space-5); }
   .hero-h1-accent { color: var(--accent); }
