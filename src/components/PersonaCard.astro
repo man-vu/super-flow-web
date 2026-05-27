@@ -19,7 +19,7 @@ const icons: Record<string, string> = {
 }
 const path = icons[icon] ?? icons.pen
 ---
-<article class="persona" data-reveal data-tilt>
+<article class="persona" data-reveal data-tilt data-icon={icon}>
   <div class="persona-head">
     <svg class="persona-icon" viewBox="0 0 24 24" aria-hidden="true">
       <path d={path} fill="currentColor" />
@@ -106,4 +106,34 @@ const path = icons[icon] ?? icons.pen
     line-height: 1.5;
   }
   .sample-before .sample-text { color: var(--text-tertiary); font-style: italic; }
+
+  /* Icon micro-animations on card hover */
+  .persona:hover .persona-icon {
+    animation-duration: 1.2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+  }
+  .persona[data-icon="pen"]:hover .persona-icon { animation-name: iconWiggle; }
+  .persona[data-icon="headset"]:hover .persona-icon { animation-name: iconPulse; }
+  .persona[data-icon="book"]:hover .persona-icon { animation-name: iconFlip; }
+  .persona[data-icon="code"]:hover .persona-icon { animation-name: iconBlink; }
+
+  @keyframes iconWiggle {
+    0%, 100% { transform: rotate(0); }
+    25%      { transform: rotate(-12deg); }
+    75%      { transform: rotate(12deg); }
+  }
+  @keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.2); }
+  }
+  @keyframes iconFlip {
+    0%, 100% { transform: scaleX(1); }
+    50%      { transform: scaleX(-1); }
+  }
+  @keyframes iconBlink {
+    0%, 40%, 60%, 100% { opacity: 1; }
+    50%                 { opacity: 0.3; }
+  }
+  html[data-motion="reduced"] .persona:hover .persona-icon { animation: none; }
 </style>

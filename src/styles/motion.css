@@ -94,3 +94,14 @@ html[data-motion="reduced"] .blob {
   animation: none;
   transform: none;
 }
+
+/* One-time pulse on kbd elements as they scroll into view. Added by scripts/kbd-pulse.ts. */
+kbd.kbd-pulse {
+  animation: kbdPulseOnce 900ms cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+@keyframes kbdPulseOnce {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0 var(--lime-soft), inset 0 -1px 0 rgba(0,0,0,0.4); }
+  40%  { transform: scale(1.18); box-shadow: 0 0 0 6px transparent,     inset 0 -1px 0 rgba(0,0,0,0.4); }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0 transparent,        inset 0 -1px 0 rgba(0,0,0,0.4); }
+}
+html[data-motion="reduced"] kbd.kbd-pulse { animation: none; }

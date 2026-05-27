@@ -35,7 +35,17 @@ const BARS = 30
     pointer-events: none;
     opacity: 0.22;
     z-index: 0;
+    /* Parallax: waveform translates UP slightly as you scroll, creating depth. */
+    animation: heroParallax linear;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+    will-change: transform;
   }
+  @keyframes heroParallax {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-60px); }
+  }
+  html[data-motion="reduced"] .hero-waveform { animation: none; transform: none; }
   .bar {
     fill: var(--lime);
     transform-box: fill-box;
