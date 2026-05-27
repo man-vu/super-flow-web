@@ -193,17 +193,41 @@ const steps = [
     background: linear-gradient(180deg, var(--surface) 0%, var(--surface) 100%);
     position: relative;
   }
+  @property --plan-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
   .plan-featured::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: var(--radius-md);
     padding: 1px;
-    background: linear-gradient(180deg, var(--accent), transparent);
+    background: conic-gradient(
+      from var(--plan-angle),
+      var(--accent) 0deg,
+      var(--lime) 90deg,
+      var(--accent) 180deg,
+      var(--accent-hover) 270deg,
+      var(--accent) 360deg
+    );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     pointer-events: none;
+    animation: planAngleSpin 6s linear infinite;
+  }
+  .plan-featured:hover::before {
+    filter: drop-shadow(0 0 12px var(--accent-glow));
+  }
+  @keyframes planAngleSpin {
+    from { --plan-angle: 0deg; }
+    to   { --plan-angle: 360deg; }
+  }
+  html[data-motion="reduced"] .plan-featured::before {
+    animation: none;
+    background: linear-gradient(180deg, var(--accent), transparent);
   }
   .plan-name {
     font-family: var(--font-mono);
