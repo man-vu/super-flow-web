@@ -52,3 +52,45 @@ html[data-motion="reduced"] [data-reveal] {
   transform: none;
   transition: none;
 }
+
+/* ---- Liquid blob shapes — sit behind content, slow drift. ---- */
+
+.blob {
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: 0.4;
+  border-radius: 50%;
+  will-change: transform;
+}
+.blob-1 {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: -120px;
+  background: radial-gradient(closest-side, var(--accent), transparent);
+  animation: blobDrift1 28s ease-in-out infinite alternate;
+}
+.blob-2 {
+  width: 520px;
+  height: 520px;
+  bottom: -180px;
+  right: -160px;
+  background: radial-gradient(closest-side, var(--lime), transparent);
+  animation: blobDrift2 32s ease-in-out infinite alternate;
+}
+
+@keyframes blobDrift1 {
+  0%   { transform: translate3d(0, 0, 0)        scale(1); }
+  100% { transform: translate3d(120px, 80px, 0) scale(1.15); }
+}
+@keyframes blobDrift2 {
+  0%   { transform: translate3d(0, 0, 0)         scale(1); }
+  100% { transform: translate3d(-80px, -100px, 0) scale(0.9); }
+}
+
+html[data-motion="reduced"] .blob {
+  animation: none;
+  transform: none;
+}
