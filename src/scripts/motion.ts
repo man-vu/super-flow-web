@@ -1,8 +1,4 @@
-/**
- * Single bootstrap entry for all client motion behaviors.
- * Sets the global motion flag, then dispatches feature modules
- * conditionally based on user preference + viewport capability.
- */
+// Sets <html data-motion> from prefers-reduced-motion. Task 2+ wire feature dispatches here.
 
 type MotionMode = 'full' | 'reduced'
 
@@ -20,4 +16,3 @@ document.documentElement.dataset.motion = mode
    pre-paint script in Base.astro already sets it, and the body::before
    mesh gradient in motion.css branches off it via the
    html[data-motion="reduced"] selector. */
-void mode
