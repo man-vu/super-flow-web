@@ -1,9 +1,160 @@
 ---
 import Base from '../layouts/Base.astro'
+import FeatureCard from '../components/FeatureCard.astro'
+import HowItWorksStep from '../components/HowItWorksStep.astro'
+import CtaButton from '../components/CtaButton.astro'
+
+const base = import.meta.env.BASE_URL
+const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
+
+const features = [
+  { icon: '⌨', title: 'F9 to dictate',     body: 'Tap F9 in any text field — the system types what you say.' },
+  { icon: '✨', title: 'Polish hotkey',    body: 'Select messy text, press Ctrl+Shift+P, get clean prose back in place.' },
+  { icon: '⚡', title: 'Voice snippets',   body: 'Say a trigger phrase, get a full email signature, address, or boilerplate.' },
+  { icon: '📖', title: 'Custom dictionary', body: 'Teach Super Flow your jargon, names, and acronyms once.' },
+  { icon: '🛡', title: 'Local or cloud',   body: 'Whisper runs offline; Deepgram + GPT-4o-mini for cloud speed when you want it.' },
+  { icon: '⟨⟩', title: 'IDE-aware',         body: 'Speaks code: camelCase, snake_case, and your active file context.' },
+]
+
+const steps = [
+  { number: 1, title: 'Install Super Flow',    body: 'Download the Windows installer. ~70 MB, signed.' },
+  { number: 2, title: 'Press F9 anywhere',     body: 'Code editor, email, browser, chat — wherever there is a text field.' },
+  { number: 3, title: 'Speak naturally',       body: 'Filler words removed, grammar fixed, punctuation added. Text appears polished.' },
+]
 ---
-<Base title="Super Flow">
-  <main class="container section">
-    <h1>Super Flow</h1>
-    <p>Real home content lands in Task 3.</p>
+<Base title="Super Flow — Dictate anywhere on Windows">
+  <main>
+    <!-- HERO -->
+    <section class="container hero">
+      <h1>Dictate anywhere on Windows.<br /><span class="accent">Polished by AI.</span></h1>
+      <p class="hero-tag">
+        Press F9 in any text field. Speak naturally. Super Flow removes filler, fixes grammar, and types the polished result.
+      </p>
+      <div class="hero-cta">
+        <CtaButton href={downloadHref} icon="⬇">Download for Windows</CtaButton>
+        <CtaButton href="#how" variant="secondary">See how it works</CtaButton>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="container section">
+      <h2>What it does</h2>
+      <div class="features-grid">
+        {features.map(f => <FeatureCard {...f} />)}
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="container section">
+      <h2>How it works</h2>
+      <div class="steps-grid">
+        {steps.map(s => <HowItWorksStep {...s} />)}
+      </div>
+    </section>
+
+    <!-- PRICING TEASER -->
+    <section class="container section">
+      <h2>Free to start. Pro when you need it.</h2>
+      <div class="pricing-teaser">
+        <div class="plan">
+          <h3>Free</h3>
+          <p class="plan-price">$0 <span>/ forever</span></p>
+          <ul>
+            <li>2,000 dictated words per week</li>
+            <li>Local Whisper transcription</li>
+            <li>Rule-based cleanup</li>
+            <li>Dictionary + snippets</li>
+          </ul>
+        </div>
+        <div class="plan plan-featured">
+          <h3>Pro</h3>
+          <p class="plan-price">$15 <span>/ month</span></p>
+          <ul>
+            <li>Unlimited words</li>
+            <li>Deepgram cloud + GPT-4o-mini cleanup</li>
+            <li>ElevenLabs read-aloud</li>
+            <li>Priority support</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pricing-link"><a href={`${base}pricing/`}>See full comparison →</a></p>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="container section final-cta">
+      <h2>Ready to stop typing?</h2>
+      <CtaButton href={downloadHref} icon="⬇">Download Super Flow</CtaButton>
+    </section>
   </main>
 </Base>
+
+<style>
+  .hero {
+    padding: var(--space-8) 0 var(--space-7);
+    text-align: center;
+  }
+  .hero h1 { margin-bottom: var(--space-4); }
+  .accent { color: var(--accent); }
+  .hero-tag {
+    font-size: 1.15rem;
+    max-width: 640px;
+    margin: 0 auto var(--space-5);
+    color: var(--text-secondary);
+  }
+  .hero-cta {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+  }
+  @media (max-width: 640px) {
+    .steps-grid { grid-template-columns: 1fr; }
+  }
+  .pricing-teaser {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+  @media (max-width: 640px) {
+    .pricing-teaser { grid-template-columns: 1fr; }
+  }
+  .plan {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+  .plan-featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .plan h3 { font-size: 1.3rem; margin-bottom: var(--space-2); }
+  .plan-price {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 var(--space-3);
+  }
+  .plan-price span {
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: var(--text-tertiary);
+  }
+  .plan ul { padding-left: 1.1rem; color: var(--text-secondary); }
+  .plan li { margin-bottom: var(--space-1); }
+  .pricing-link { text-align: center; margin-top: var(--space-4); }
+  .final-cta { text-align: center; padding-bottom: var(--space-8); }
+</style>

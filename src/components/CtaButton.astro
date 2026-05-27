@@ -1,0 +1,33 @@
+---
+interface Props { href: string; variant?: 'primary' | 'secondary'; icon?: string }
+const { href, variant = 'primary', icon } = Astro.props
+---
+<a href={href} class={`cta cta-${variant}`}>
+  {icon && <span class="icon">{icon}</span>}
+  <slot />
+</a>
+<style>
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+  .cta:active { transform: translateY(1px); }
+  .cta-primary {
+    background: var(--accent);
+    color: #fff !important;
+  }
+  .cta-primary:hover { background: var(--accent-hover); color: #fff !important; }
+  .cta-secondary {
+    background: transparent;
+    color: var(--text) !important;
+    border: 1px solid var(--border);
+  }
+  .cta-secondary:hover { background: var(--surface-hover); color: var(--text) !important; }
+  .icon { font-size: 1.1rem; }
+</style>

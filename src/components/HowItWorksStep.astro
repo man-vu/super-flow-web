@@ -1,0 +1,27 @@
+---
+interface Props { number: number; title: string; body: string }
+const { number, title, body } = Astro.props
+---
+<div class="step">
+  <div class="num">{number}</div>
+  <h3>{title}</h3>
+  <p>{body}</p>
+</div>
+<style>
+  .step { text-align: center; }
+  .num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 auto var(--space-3);
+  }
+  h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
+  p { margin: 0; font-size: 0.94rem; }
+</style>
