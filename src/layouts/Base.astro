@@ -3,6 +3,7 @@ import '../styles/global.css'
 import '../styles/motion.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import ScrollProgress from '../components/ScrollProgress.astro'
 
 interface Props {
   title: string
@@ -34,6 +35,7 @@ const base = import.meta.env.BASE_URL
     </script>
   </head>
   <body>
+    <ScrollProgress />
     <Header />
     <slot />
     <Footer />

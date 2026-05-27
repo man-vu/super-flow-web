@@ -3,7 +3,7 @@ interface Props { number: number; title: string; body: string }
 const { number, title, body } = Astro.props
 const pad = String(number).padStart(2, '0')
 ---
-<div class="step">
+<div class="step" data-reveal>
   <div class="num">{pad}</div>
   <h3>{title}</h3>
   <p>{body}</p>
