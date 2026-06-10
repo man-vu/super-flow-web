@@ -1,433 +1,515 @@
----
-import Base from '../layouts/Base.astro'
-import FeatureCard from '../components/FeatureCard.astro'
-import HowItWorksStep from '../components/HowItWorksStep.astro'
-import CtaButton from '../components/CtaButton.astro'
-import HeroWaveform from '../components/HeroWaveform.astro'
-import StatsStrip from '../components/StatsStrip.astro'
-import MarqueeApps from '../components/MarqueeApps.astro'
-import PersonaCard from '../components/PersonaCard.astro'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Super Flow — Stop typing. Start talking.</title>
+<meta name="description" content="Press F9 in any app and speak. Super Flow types the clean, polished version — filler gone, grammar fixed — wherever your cursor is. On-device on Free.">
+<script is:inline>
+  document.documentElement.dataset.motion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-const base = import.meta.env.BASE_URL
-const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#top" class="brand" aria-label="Super Flow home">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      Super&nbsp;Flow
+    </a>
+    <nav class="nav">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#privacy" class="nav-link">Privacy</a>
+      <a href="#languages" class="nav-link">Languages</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#download" class="btn btn-primary nav-cta">Download <span class="arr">→</span></a>
+    </nav>
+  </div>
+</header>
 
-const features = [
-  { title: 'F9 to dictate',     body: 'Tap <kbd>F9</kbd> in any text field — email, Slack, doc, browser — and the system types what you say.' },
-  { title: 'Polish hotkey',     body: 'Select messy text, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>, get clean prose back in place.' },
-  { title: 'Voice snippets',    body: 'Say a trigger phrase, get a full email signature, address, or boilerplate.' },
-  { title: 'Custom dictionary', body: 'Teach Super Flow your jargon, names, and acronyms once.' },
-  { title: 'Local or cloud',    body: 'Whisper runs offline; Deepgram + GPT-4o-mini when you want cloud speed.' },
-  { title: 'IDE-aware coding',  body: 'When the cursor is in code, Super Flow speaks camelCase, snake_case, and your file context.' },
-]
+<main id="top">
+<!-- ============ HERO ============ -->
+<section class="hero container">
+  <span class="hero-kicker"><span class="dot"></span> for anyone who types all day</span>
+  <h1 class="display" data-hero-headline>Stop typing.<br><span class="accent">Start talking.</span></h1>
+  <p class="lead" data-hero-sub>Press <kbd>F9</kbd> in any text field — email, doc, Slack, code. Super Flow removes the <em class="hl">ums</em>, fixes the grammar, and types the <em class="hl">clean</em> version straight into whatever app you're in.</p>
+  <div class="hero-cta">
+    <a href="#download" class="btn btn-primary btn-lg">Download for Windows <span class="arr">→</span></a>
+    <a href="#demo" class="btn btn-ghost btn-lg">Watch it work <span class="arr">→</span></a>
+  </div>
+  <div class="hero-meta">Windows 10 &amp; 11 · <b>70 MB</b> · signed installer · <b>free forever</b></div>
 
-const steps = [
-  { number: 1, title: 'Install Super Flow', body: 'Download the Windows installer. ~70 MB, signed.' },
-  { number: 2, title: 'Press F9 anywhere',  body: 'Code editor, email, browser, chat — wherever there is a text field.' },
-  { number: 3, title: 'Speak naturally',    body: 'Filler removed, grammar fixed, punctuation added. Polished text appears in place.' },
-]
-
-const personas = [
-  {
-    icon: 'pen',
-    label: 'Writers',
-    useCase: 'Drafting long-form posts and essays.',
-    before: 'so basically what im saying is like um the whole point of this is that you can just talk instead of typing right',
-    after: 'The point is simple: you talk instead of typing.',
-  },
-  {
-    icon: 'headset',
-    label: 'Support leads',
-    useCase: 'Replying to tickets without RSI by 4pm.',
-    before: 'hi sorry for the delay um can you try restarting and then like let me know if that helps',
-    after: 'Sorry for the delay. Could you try restarting and let me know if that helps?',
-  },
-  {
-    icon: 'book',
-    label: 'Students',
-    useCase: 'Taking notes faster than they can be lectured.',
-    before: 'so the thing about the krebs cycle is its like a loop and it takes acetyl coa and turns it into co2 i think',
-    after: 'The Krebs cycle is a loop: it takes acetyl-CoA and turns it into CO₂.',
-  },
-  {
-    icon: 'code',
-    label: 'Developers',
-    useCase: 'Dictating PR descriptions, commits, and code comments.',
-    before: 'this pr adds the new auth flow plus a couple bug fixes also fixes the thing with the dropdown',
-    after: 'This PR adds the new auth flow and fixes the dropdown bug.',
-  },
-]
----
-<Base title="Super Flow — Dictate anywhere on Windows">
-  <main>
-    <!-- HERO -->
-    <section class="container hero">
-      <HeroWaveform />
-      <div class="hero-content">
-        <div class="hero-kicker">for anyone who types</div>
-        <h1 class="hero-h1">
-          {Array.from("Speak.").map((ch, i) => (
-            <span class="char" style={`--i: ${i}`}>{ch}</span>
-          ))}<br />
-          <span class="hero-h1-accent">
-            {Array.from("We'll polish.").map((ch, i) => (
-              <span class="char" style={`--i: ${i + 7}`}>{ch === ' ' ? ' ' : ch}</span>
-            ))}
-          </span>
-        </h1>
-        <p class="hero-tag">
-          Press <kbd>F9</kbd> in any text field — email, doc, chat, code.
-          Super Flow removes the <em>ums</em>, fixes the grammar, and types
-          the clean version into whatever app you are focused on.
-        </p>
-        <div class="hero-cta">
-          <CtaButton href={downloadHref}>Download for Windows</CtaButton>
-          <CtaButton href="#how" variant="secondary">See how it works</CtaButton>
+  <!-- animated demo -->
+  <div class="demo-wrap" id="demo">
+    <div class="demo-window" id="demoWindow">
+      <div class="win-bar">
+        <div class="win-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="win-title">✉︎ <b>New message</b> — your email, your cursor</div>
+      </div>
+      <div class="demo-stage">
+        <div class="mail-meta" aria-hidden="true">
+          <div class="mail-row"><span class="lbl">To</span><span class="val">maria@northwind.co</span></div>
+          <div class="mail-row"><span class="lbl">Subj</span><span class="val">Friday report</span></div>
         </div>
-        <div class="hero-meta">
-          Windows 10 &amp; 11 · 70 MB · Signed installer
+        <div class="compose" id="composeField" aria-live="polite"><span class="ph" id="composePh">Click here, press </span><kbd id="composeKbd">F9</kbd><span class="ph" id="composePh2">, and just talk…</span><span class="caret" id="composeCaret" hidden></span></div>
+
+        <div class="said-cap" id="saidCap"><span class="tag">heard&nbsp;</span><span id="saidText"></span></div>
+
+        <div class="overlay-pill" id="overlayPill" data-mode="listen">
+          <span class="ov-state"><span class="led"></span><span id="ovLabel">Listening</span></span>
+          <div class="wave" id="wave" aria-hidden="true"></div>
+          <span class="ov-sep"></span>
+          <span class="ov-key"><kbd>F9</kbd> to stop</span>
         </div>
       </div>
-    </section>
+    </div>
+    <p class="demo-caption">A live mock of the real thing — <b>speak naturally, get polished text in place.</b> No editing, no retyping.</p>
+  </div>
+</section>
 
-    <StatsStrip />
+<!-- ============ MARQUEE ============ -->
+<section class="marquee-sec">
+  <div class="marquee-lab">works in every app you already use</div>
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="marquee-item">Gmail</span><span class="marquee-item">Notion</span><span class="marquee-item">VS&nbsp;Code</span><span class="marquee-item">Slack</span><span class="marquee-item">Word</span><span class="marquee-item">Google&nbsp;Docs</span><span class="marquee-item">Discord</span><span class="marquee-item">Outlook</span><span class="marquee-item">Linear</span><span class="marquee-item">Figma</span><span class="marquee-item">ChatGPT</span><span class="marquee-item">Cursor</span><span class="marquee-item">Obsidian</span>
+    </div>
+  </div>
+</section>
 
-    <MarqueeApps />
+<!-- ============ STATS ============ -->
+<section class="band-tight container">
+  <div class="stats-grid">
+    <div class="stat" data-reveal>
+      <div class="stat-value"><span data-counter="3" data-suffix="×">0×</span></div>
+      <div class="stat-label">faster than typing — you speak ~150 wpm, type ~50</div>
+    </div>
+    <div class="stat" data-reveal>
+      <div class="stat-value"><span class="pre">&lt;</span><span data-counter="1" data-suffix="s">0s</span></div>
+      <div class="stat-label">from hotkey to polished text in your field</div>
+    </div>
+    <div class="stat" data-reveal>
+      <div class="stat-value"><span data-counter="100" data-suffix="%">0%</span></div>
+      <div class="stat-label">on-device on the Free plan — nothing leaves your PC</div>
+    </div>
+  </div>
+</section>
 
-    <!-- FEATURES -->
-    <section class="container section">
-      <span class="eyebrow">what it does</span>
-      <h2>Six things, done well.</h2>
-      <div class="features-grid">
-        {features.map((f, i) => <FeatureCard index={i + 1} title={f.title} body={f.body} />)}
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section id="how" class="container section">
-      <span class="eyebrow">how it works</span>
-      <h2>Three steps to never typing again.</h2>
-      <div class="steps-grid">
-        {steps.map(s => <HowItWorksStep number={s.number} title={s.title} body={s.body} />)}
-      </div>
-    </section>
-
-    <!-- WHO IT'S FOR -->
-    <section class="container section">
-      <span class="eyebrow">who uses it</span>
-      <h2>Not just for developers.</h2>
-      <div class="personas-grid">
-        {personas.map(p => (
-          <PersonaCard
-            icon={p.icon}
-            label={p.label}
-            useCase={p.useCase}
-            before={p.before}
-            after={p.after}
-          />
-        ))}
-      </div>
-    </section>
-
-    <!-- PRICING TEASER -->
-    <section class="container section">
-      <span class="eyebrow">pricing</span>
-      <h2>Free to start. Pro when you need it.</h2>
-      <div class="pricing-teaser">
-        <div class="plan" data-reveal data-tilt>
-          <div class="plan-name">Free</div>
-          <p class="plan-price tabular"><span class="dollar">$</span>0 <span class="cycle">/ forever</span></p>
-          <ul>
-            <li>2,000 dictated words per week</li>
-            <li>Local Whisper transcription</li>
-            <li>Rule-based cleanup</li>
-            <li>Dictionary + snippets</li>
-          </ul>
+<!-- ============ APP SHOWCASE ============ -->
+<section class="band container" id="app">
+  <div class="section-head">
+    <span class="eyebrow">your command center</span>
+    <h2 class="section-title">One quiet home for<br>everything you say.</h2>
+    <p class="lead">Dictation lands in your apps — but every word also flows back here: your streak, your speed, an activity map, and a searchable history of everything you've spoken.</p>
+  </div>
+  <div class="showcase-window" data-reveal>
+    <div class="win-bar">
+      <div class="win-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="win-title"><b>Super Flow</b> — Home</div>
+    </div>
+    <div class="hub">
+      <aside class="hub-side">
+        <div class="hub-brand"><span class="brand-mark" aria-hidden="true"><span></span></span> Super Flow <span class="badge">Free</span></div>
+        <div class="hub-sec">Workspace</div>
+        <nav class="hub-nav">
+          <div class="hub-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 9v11h14V9"/></svg> Home</div>
+          <div class="hub-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Insights</div>
+          <div class="hub-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h11l4 4v14H5zM15 3v5h5"/></svg> Notes</div>
+          <div class="hub-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg> Meetings</div>
+          <div class="hub-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9M3 12v5M3 12h5"/></svg> History</div>
+          <div class="hub-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg> Flow Lens</div>
+          <div class="hub-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg> Polish</div>
+        </nav>
+        <div class="hub-quota">
+          <div class="q-top"><b>4,820</b> words this week</div>
+          <div class="q-bar"><i></i></div>
+          <span class="q-up">Upgrade to Pro</span>
         </div>
-        <div class="plan plan-featured" data-reveal data-tilt>
-          <div class="plan-name plan-name-pro">Pro</div>
-          <p class="plan-price tabular"><span class="dollar">$</span>15 <span class="cycle">/ month</span></p>
-          <ul>
-            <li>Unlimited words</li>
-            <li>Deepgram cloud + GPT-4o-mini cleanup</li>
-            <li>ElevenLabs read-aloud</li>
-            <li>Priority support</li>
-          </ul>
+      </aside>
+      <div class="hub-main">
+        <div class="hub-welcome">Welcome back, Maria.</div>
+        <div class="hub-stats">
+          <div class="hub-stat"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3s0 2 2 2 1-3 2-5 0-3-2-5z"/></svg></span><div><div class="sv">7</div><div class="sl">day streak</div></div></div>
+          <div class="hub-stat"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg></span><div><div class="sv">128k</div><div class="sl">lifetime words</div></div></div>
+          <div class="hub-stat"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></span><div><div class="sv">142</div><div class="sl">avg WPM</div></div></div>
+        </div>
+        <div class="hub-card">
+          <div class="hub-card-h"><b>Activity</b><span class="pill">Last 7 days</span></div>
+          <div class="heat" id="hubHeat" aria-hidden="true"></div>
+        </div>
+        <div class="hub-recent">
+          <div class="rec-row"><span class="rec-app" style="background:#d44638">Gm</span><span class="rec-txt">Can you send me the report by Friday? Thanks!</span><span class="rec-meta">2m · 31w</span></div>
+          <div class="rec-row"><span class="rec-app" style="background:#4a154b">Sl</span><span class="rec-txt">Shipping the beta Thursday — I'll own the release notes.</span><span class="rec-meta">18m · 44w</span></div>
+          <div class="rec-row"><span class="rec-app" style="background:#0067b8">Co</span><span class="rec-txt">This PR adds the new auth flow and fixes the dropdown bug.</span><span class="rec-meta">1h · 22w</span></div>
         </div>
       </div>
-      <p class="pricing-link"><a href={`${base}pricing/`}>See full comparison →</a></p>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- FINAL CTA -->
-    <section class="container section final-cta">
-      <h2>Ready to stop typing?</h2>
-      <p>Free forever. No credit card. Upgrade later if you want unlimited.</p>
-      <CtaButton href={downloadHref}>Download Super Flow</CtaButton>
-    </section>
-  </main>
-</Base>
+<!-- ============ FEATURES BENTO ============ -->
+<section class="band container" id="features">
+  <div class="section-head">
+    <span class="eyebrow">what it does</span>
+    <h2 class="section-title">Dictation is just<br>the start.</h2>
+    <p class="lead">One hotkey turns speech into clean text anywhere. Then it keeps going — polishing selections, transcribing meetings, and answering questions about whatever's on your screen.</p>
+  </div>
 
-<style>
-  /* HERO — left-aligned, terminal-prompt eyebrow, big mono headline */
-  .hero {
-    position: relative;
-    padding: var(--space-8) 0 var(--space-7);
-    max-width: 880px;
-  }
-  .hero-content {
-    position: relative;
-    z-index: 1;
-  }
-  .hero-kicker {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--lime);
-    margin-bottom: var(--space-4);
-    padding: 4px 10px;
-    border: 1px solid var(--lime-soft);
-    background: var(--lime-soft);
-    border-radius: var(--radius-sm);
-  }
-  .hero h1 { margin-bottom: var(--space-5); }
-  .hero-h1 .char {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(24px);
-    animation: charRise 700ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-    animation-delay: calc(var(--i, 0) * 35ms + 200ms);
-  }
-  @keyframes charRise {
-    to { opacity: 1; transform: none; }
-  }
-  html[data-motion="reduced"] .hero-h1 .char {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-  .hero-h1-accent {
-    background: linear-gradient(90deg, var(--accent), var(--lime), var(--accent-hover), var(--accent));
-    background-size: 300% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    animation: accentSweep 6s linear infinite;
-  }
-  @keyframes accentSweep {
-    from { background-position: 0% 0%; }
-    to   { background-position: -300% 0%; }
-  }
-  html[data-motion="reduced"] .hero-h1-accent {
-    animation: none;
-    background: none;
-    -webkit-text-fill-color: var(--accent);
-    color: var(--accent);
-  }
-  /* Page-load entrance choreography for hero elements (excluding the
-     letter-by-letter H1 which has its own animation). */
-  .hero-kicker     { opacity: 0; animation: heroEnter 600ms ease-out 50ms forwards; }
-  .hero-tag        { opacity: 0; animation: heroEnter 600ms ease-out 900ms forwards; transform: translateY(8px); }
-  .hero-cta        { opacity: 0; animation: heroEnter 600ms ease-out 1100ms forwards; transform: translateY(8px); }
-  .hero-meta       { opacity: 0; animation: heroEnter 600ms ease-out 1300ms forwards; }
-  @keyframes heroEnter {
-    to { opacity: 1; transform: none; }
-  }
-  html[data-motion="reduced"] .hero-kicker,
-  html[data-motion="reduced"] .hero-tag,
-  html[data-motion="reduced"] .hero-cta,
-  html[data-motion="reduced"] .hero-meta {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-  .hero-tag {
-    font-size: 1.1rem;
-    max-width: 620px;
-    margin: 0 0 var(--space-6);
-    color: var(--text-secondary);
-    line-height: 1.55;
-  }
-  .hero-cta {
-    display: flex;
-    gap: var(--space-3);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-5);
-  }
-  .hero-meta {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--text-tertiary);
-    letter-spacing: 0.02em;
-  }
+  <div class="bento">
+    <!-- big: dictate -->
+    <div class="cell col-3 cell-feature" data-reveal>
+      <div class="c-eyebrow">● the core loop</div>
+      <h3>Press F9. Speak. Done.</h3>
+      <p>Tap <kbd>F9</kbd> in any text field and the system types what you say — filler removed, grammar fixed, punctuation added.</p>
+      <div class="mini-baf">
+        <div class="mini-line before"><span class="mtag">you say</span>so basically um can you send me the the report by friday and uh thanks</div>
+        <div class="mini-line after"><span class="mtag">it types</span>Can you send me the report by Friday? Thanks!</div>
+      </div>
+    </div>
 
-  /* FEATURES — sharp-cornered, numbered cards */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    margin-top: var(--space-5);
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-  @media (max-width: 900px) {
-    .features-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .features-grid { grid-template-columns: 1fr; }
-  }
+    <!-- big: polish -->
+    <div class="cell col-3 cell-feature" data-reveal>
+      <div class="c-eyebrow">● rewrite in place</div>
+      <h3>Polish anything you've already written.</h3>
+      <p>Select messy text in any app, hit the hotkey, get clean prose back in place. Native <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes it.</p>
+      <div class="keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>P</kbd><span class="cmd-chip">Fix grammar</span><span class="cmd-chip">Make concise</span><span class="cmd-chip">Professional</span></div>
+      <div class="cell-spacer"></div>
+    </div>
 
-  /* STEPS */
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-5);
-    margin-top: var(--space-5);
-  }
-  @media (max-width: 700px) {
-    .steps-grid { grid-template-columns: 1fr; }
-  }
+    <!-- meetings -->
+    <div class="cell col-2 cell-feature cell-dark" data-reveal>
+      <div class="c-eyebrow">● meetings</div>
+      <h3>Live meeting transcripts.</h3>
+      <p>Auto-transcribe calls in real time. Pin, finalize, and keep version history.</p>
+      <div class="mini-transcript">
+        <div class="tline"><span class="who">Alex</span><span class="said">Let's ship the beta next Thursday.</span></div>
+        <div class="tline"><span class="who">You</span><span class="said">Agreed — I'll own the release notes.</span></div>
+      </div>
+    </div>
 
-  /* PERSONAS — 2x2 grid that collapses to single column on mobile. */
-  .personas-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
-    margin-top: var(--space-5);
-  }
-  @media (max-width: 700px) {
-    .personas-grid { grid-template-columns: 1fr; }
-  }
+    <!-- flow lens -->
+    <div class="cell col-2 cell-feature" data-reveal>
+      <div class="c-eyebrow">● flow lens</div>
+      <h3>Ask about your screen.</h3>
+      <p>A chat that reads your focused window and answers grounded in what's actually there.</p>
+      <div class="mini-chat">
+        <div class="bubble you">What's this email asking for?</div>
+        <div class="bubble ai">A budget sign-off by Friday.</div>
+      </div>
+    </div>
 
-  /* PRICING TEASER */
-  .pricing-teaser {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3);
-    margin-top: var(--space-5);
-  }
-  @media (max-width: 640px) {
-    .pricing-teaser { grid-template-columns: 1fr; }
-  }
-  .plan {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-  }
-  .plan-featured {
-    border-color: var(--accent);
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface) 100%);
-    position: relative;
-  }
-  @property --plan-angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
-  }
-  .plan-featured::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius-md);
-    padding: 1px;
-    background: conic-gradient(
-      from var(--plan-angle),
-      var(--accent) 0deg,
-      var(--lime) 90deg,
-      var(--accent) 180deg,
-      var(--accent-hover) 270deg,
-      var(--accent) 360deg
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-    animation: planAngleSpin 6s linear infinite;
-  }
-  .plan-featured:hover::before {
-    filter: drop-shadow(0 0 12px var(--accent-glow));
-  }
-  @keyframes planAngleSpin {
-    from { --plan-angle: 0deg; }
-    to   { --plan-angle: 360deg; }
-  }
-  html[data-motion="reduced"] .plan-featured::before {
-    animation: none;
-    background: linear-gradient(180deg, var(--accent), transparent);
-  }
-  .plan-name {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-tertiary);
-    margin-bottom: var(--space-3);
-  }
-  .plan-name-pro { color: var(--accent); }
-  .plan-price {
-    font-family: var(--font-heading);
-    font-size: 2.4rem;
-    font-weight: 600;
-    color: var(--text);
-    margin: 0 0 var(--space-3);
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-  .plan-price .dollar {
-    font-size: 1.4rem;
-    color: var(--text-tertiary);
-    font-weight: 500;
-    vertical-align: 8px;
-    margin-right: 2px;
-  }
-  .plan-price .cycle {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--text-tertiary);
-    letter-spacing: 0;
-  }
-  .plan ul {
-    padding: 0;
-    list-style: none;
-    margin: 0;
-    color: var(--text-secondary);
-  }
-  .plan li {
-    padding: 6px 0 6px 18px;
-    position: relative;
-    font-size: 0.95rem;
-  }
-  .plan li::before {
-    content: '+';
-    position: absolute;
-    left: 0;
-    top: 6px;
-    color: var(--lime);
-    font-family: var(--font-mono);
-    font-weight: 600;
-  }
-  .pricing-link {
-    text-align: left;
-    margin-top: var(--space-4);
-  }
-  .pricing-link a {
-    font-family: var(--font-mono);
-    font-size: 0.88rem;
-    color: var(--accent);
-  }
-  .pricing-link a:hover { color: var(--accent-hover); }
+    <!-- command mode -->
+    <div class="cell col-2 cell-feature" data-reveal>
+      <div class="c-eyebrow">● command mode</div>
+      <h3>Talk to your text.</h3>
+      <p>Highlight, hold the key, and tell it what to do with the selection.</p>
+      <div>
+        <span class="cmd-chip">“translate to Spanish”</span>
+        <span class="cmd-chip">“make it two sentences”</span>
+        <span class="cmd-chip">“fix grammar”</span>
+      </div>
+    </div>
 
-  /* FINAL CTA */
-  .final-cta {
-    text-align: left;
-    border-top: 1px solid var(--border);
-    margin-top: var(--space-7);
-    padding: var(--space-8) 0;
-  }
-  .final-cta p { margin-bottom: var(--space-5); max-width: 480px; }
-</style>
+    <!-- small trio -->
+    <div class="cell col-2" data-reveal>
+      <div class="c-eyebrow">● snippets</div>
+      <h3>Voice snippets.</h3>
+      <p>Say a trigger phrase, get a full signature, address, or boilerplate.</p>
+    </div>
+    <div class="cell col-2" data-reveal>
+      <div class="c-eyebrow">● dictionary</div>
+      <h3>Custom dictionary.</h3>
+      <p>Teach it your names, jargon, and acronyms once. Import a CSV in bulk.</p>
+    </div>
+    <div class="cell col-2" data-reveal>
+      <div class="c-eyebrow">● for developers</div>
+      <h3>IDE-aware coding.</h3>
+      <p>In code, it speaks <kbd>camelCase</kbd>, <kbd>snake_case</kbd>, and your file context.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="band-tight container">
+  <div class="section-head center">
+    <span class="eyebrow">a look inside</span>
+    <h2 class="section-title">Built to live on your desktop.</h2>
+  </div>
+  <div class="gallery">
+    <figure class="shot" data-reveal>
+      <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Transforms</span></div>
+      <div class="shot-img"><img src="assets/app-transforms.png" alt="Super Flow Transforms — rewrite rules you can run anywhere" loading="lazy"></div>
+      <figcaption class="shot-cap"><b>Transforms</b><span>Save rewrite rules and run them on any selection.</span></figcaption>
+    </figure>
+    <figure class="shot" data-reveal>
+      <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Polish</span></div>
+      <div class="shot-img"><img src="assets/app-polish.png" alt="Super Flow Polish — built-in prompts with their own shortcuts" loading="lazy"></div>
+      <figcaption class="shot-cap"><b>Polish prompts</b><span>Grammar, concise, professional — each with its own hotkey.</span></figcaption>
+    </figure>
+    <figure class="shot" data-reveal>
+      <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Settings</span></div>
+      <div class="shot-img"><img src="assets/app-settings.png" alt="Super Flow Settings — hotkey, mic, language, transcription engine" loading="lazy"></div>
+      <figcaption class="shot-cap"><b>Tune everything</b><span>Hotkey, mic, language, and transcription engine — your call.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section class="band dark-band" id="privacy">
+  <div class="container privacy-grid">
+    <div>
+      <span class="eyebrow">privacy &amp; security</span>
+      <h2 class="section-title" style="margin-top:18px">Your voice never has to leave your machine.</h2>
+      <p class="lead">On the Free plan, transcription runs entirely on-device with local Whisper. No cloud round-trip, no account required to start.</p>
+      <div class="priv-points">
+        <div class="priv-point"><span class="pn">01</span><div><h3>On-device transcription</h3><p>Local Whisper turns speech into text without the audio ever touching a server.</p></div></div>
+        <div class="priv-point"><span class="pn">02</span><div><h3>Privacy Mode</h3><p>Flip it on and nothing is written to disk — no history rows, no archived audio. The session leaves no trace.</p></div></div>
+        <div class="priv-point"><span class="pn">03</span><div><h3>You hold the keys</h3><p>Going cloud for speed is opt-in. Bring your own API key — we're not a middleman for your data.</p></div></div>
+      </div>
+    </div>
+    <div class="priv-visual">
+      <div class="toggle-row"><div class="tr-label"><b>Privacy Mode</b><span>Don't save history or audio</span></div><div class="switch"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>Local Whisper</b><span>On-device transcription</span></div><div class="switch"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>Cloud speed (Deepgram)</b><span>Opt-in, your API key</span></div><div class="switch off"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>Store recordings</b><span>Keep audio archive on disk</span></div><div class="switch off"></div></div>
+      <div class="priv-chip-row">
+        <span class="priv-chip">No account to start</span>
+        <span class="priv-chip">Local-first</span>
+        <span class="priv-chip">Signed installer</span>
+        <span class="priv-chip">Open releases</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LANGUAGES ============ -->
+<section class="band container center" id="languages">
+  <div class="section-head center">
+    <span class="eyebrow">12 languages</span>
+    <h2 class="section-title">Dictate in your language.<br>Switch mid-sentence.</h2>
+    <p class="lead">Language pills live right in the recording overlay — change transcription language without ever opening Settings.</p>
+  </div>
+  <div class="lang-grid" data-reveal>
+    <div class="lang"><span class="native">A</span><span class="en">English</span></div>
+    <div class="lang"><span class="native">Es</span><span class="en">Español</span></div>
+    <div class="lang"><span class="native">Fr</span><span class="en">Français</span></div>
+    <div class="lang"><span class="native">De</span><span class="en">Deutsch</span></div>
+    <div class="lang"><span class="native">It</span><span class="en">Italiano</span></div>
+    <div class="lang"><span class="native">Pt</span><span class="en">Português</span></div>
+    <div class="lang"><span class="native">中</span><span class="en">中文</span></div>
+    <div class="lang"><span class="native">日</span><span class="en">日本語</span></div>
+    <div class="lang"><span class="native">한</span><span class="en">한국어</span></div>
+    <div class="lang"><span class="native">ع</span><span class="en">العربية</span></div>
+    <div class="lang"><span class="native">Ру</span><span class="en">Русский</span></div>
+    <div class="lang"><span class="native">हि</span><span class="en">हिन्दी</span></div>
+  </div>
+</section>
+
+<!-- ============ COMPARISON ============ -->
+<section class="band dark-band">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">why super flow</span>
+      <h2 class="section-title">More than dictation.</h2>
+      <p class="lead">Most voice tools stop at speech-to-text. Super Flow cleans it up, works everywhere, and keeps an on-device option.</p>
+    </div>
+    <div class="compare">
+      <table>
+        <colgroup><col><col class="us-col"><col><col></colgroup>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="us"><span class="us-head"><span class="brand-mark" aria-hidden="true"><span></span></span> Super Flow</span></th>
+            <th>Typing</th>
+            <th>Basic dictation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Speed</td><td class="us">~150 wpm</td><td>~50 wpm</td><td>~150 wpm</td></tr>
+          <tr><td>Cleans up filler &amp; grammar</td><td class="us"><span class="tick">✓</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td></tr>
+          <tr><td>Works in every app, in place</td><td class="us"><span class="tick">✓</span></td><td><span class="tick">✓</span></td><td>Some</td></tr>
+          <tr><td>On-device / private option</td><td class="us"><span class="tick">✓</span></td><td><span class="tick">✓</span></td><td><span class="cross">—</span></td></tr>
+          <tr><td>Meeting transcription</td><td class="us"><span class="tick">✓</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td></tr>
+          <tr><td>Screen-aware assistant</td><td class="us"><span class="tick">✓</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td></tr>
+          <tr><td>Price to start</td><td class="us">Free</td><td>Free</td><td>Varies</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERSONAS ============ -->
+<section class="band container">
+  <div class="section-head">
+    <span class="eyebrow">who uses it</span>
+    <h2 class="section-title">Not just for developers.</h2>
+  </div>
+  <div class="persona-grid">
+    <article class="persona" data-reveal>
+      <div class="persona-head">
+        <span class="persona-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+        <div><div class="persona-label">Writers</div><div class="persona-use">Drafting long-form posts and essays.</div></div>
+      </div>
+      <div class="baf-row b"><span class="bt">said</span><span class="bx">so basically what im saying is like um the whole point is you can just talk instead of typing right</span></div>
+      <div class="baf-div"></div>
+      <div class="baf-row a"><span class="bt">typed</span><span class="bx">The point is simple: you talk instead of typing.</span></div>
+    </article>
+    <article class="persona" data-reveal>
+      <div class="persona-head">
+        <span class="persona-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></span>
+        <div><div class="persona-label">Support leads</div><div class="persona-use">Clearing the queue without RSI by 4pm.</div></div>
+      </div>
+      <div class="baf-row b"><span class="bt">said</span><span class="bx">hi sorry for the delay um can you try restarting and then like let me know if that helps</span></div>
+      <div class="baf-div"></div>
+      <div class="baf-row a"><span class="bt">typed</span><span class="bx">Sorry for the delay. Could you try restarting and let me know if that helps?</span></div>
+    </article>
+    <article class="persona" data-reveal>
+      <div class="persona-head">
+        <span class="persona-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg></span>
+        <div><div class="persona-label">Students</div><div class="persona-use">Taking notes faster than the lecture.</div></div>
+      </div>
+      <div class="baf-row b"><span class="bt">said</span><span class="bx">so the thing about the krebs cycle is its like a loop and it takes acetyl coa and turns it into co2 i think</span></div>
+      <div class="baf-div"></div>
+      <div class="baf-row a"><span class="bt">typed</span><span class="bx">The Krebs cycle is a loop: it takes acetyl-CoA and turns it into CO₂.</span></div>
+    </article>
+    <article class="persona" data-reveal>
+      <div class="persona-head">
+        <span class="persona-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></span>
+        <div><div class="persona-label">Developers</div><div class="persona-use">Dictating PRs, commits, and comments.</div></div>
+      </div>
+      <div class="baf-row b"><span class="bt">said</span><span class="bx">this pr adds the new auth flow plus a couple bug fixes also fixes the thing with the dropdown</span></div>
+      <div class="baf-div"></div>
+      <div class="baf-row a"><span class="bt">typed</span><span class="bx">This PR adds the new auth flow and fixes the dropdown bug.</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="band-tight container">
+  <div class="section-head center">
+    <span class="eyebrow">early users</span>
+    <h2 class="section-title">People stopped typing.</h2>
+  </div>
+  <div class="quote-grid">
+    <figure class="quote" data-reveal>
+      <blockquote class="qt">“I clear my support queue <b>an hour earlier</b> and my wrists thank me.”</blockquote>
+      <figcaption class="qf"><span class="av">JM</span><span class="who"><b>Jordan M.</b><span>Support lead</span></span></figcaption>
+    </figure>
+    <figure class="quote" data-reveal>
+      <blockquote class="qt">“It actually <b>cleans up</b> how I ramble. The text reads like I edited it.”</blockquote>
+      <figcaption class="qf"><span class="av">PR</span><span class="who"><b>Priya R.</b><span>Product writer</span></span></figcaption>
+    </figure>
+    <figure class="quote" data-reveal>
+      <blockquote class="qt">“On-device means I can dictate <b>client notes</b> without a second thought.”</blockquote>
+      <figcaption class="qf"><span class="av">DK</span><span class="who"><b>Daniel K.</b><span>Consultant</span></span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="band container center" id="pricing">
+  <div class="section-head center">
+    <span class="eyebrow">pricing</span>
+    <h2 class="section-title">Free to start. Pro when you need it.</h2>
+  </div>
+  <div class="price-grid">
+    <div class="plan" data-reveal>
+      <div class="plan-tag">Free</div>
+      <div class="plan-price">$0 <span class="cy">/ forever</span></div>
+      <ul>
+        <li>2,000 dictated words per week</li>
+        <li>On-device Whisper transcription</li>
+        <li>Rule-based cleanup</li>
+        <li>Dictionary, snippets &amp; Privacy Mode</li>
+      </ul>
+      <a href="#download" class="btn btn-ghost">Download free <span class="arr">→</span></a>
+    </div>
+    <div class="plan plan-pro" data-reveal>
+      <div class="plan-tag">Pro</div>
+      <div class="plan-price">$15 <span class="cy">/ month</span></div>
+      <ul>
+        <li>Unlimited words</li>
+        <li>Cloud speed + AI cleanup (GPT-4o-mini)</li>
+        <li>Meetings, Flow Lens &amp; read-aloud</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#download" class="btn btn-primary">Start with Pro <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHORTCUTS ============ -->
+<section class="band-tight container">
+  <div class="section-head center">
+    <span class="eyebrow">keyboard-first</span>
+    <h2 class="section-title">The whole thing, by hotkey.</h2>
+  </div>
+  <div class="sc-grid">
+    <div class="sc" data-reveal><div class="sc-desc"><b>Dictate</b><span>Speak into any text field</span></div><div class="sc-keys"><kbd>F9</kbd></div></div>
+    <div class="sc" data-reveal><div class="sc-desc"><b>Polish selection</b><span>Rewrite highlighted text in place</span></div><div class="sc-keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>P</kbd></div></div>
+    <div class="sc" data-reveal><div class="sc-desc"><b>Command mode</b><span>Tell it what to do with a selection</span></div><div class="sc-keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>;</kbd></div></div>
+    <div class="sc" data-reveal><div class="sc-desc"><b>Say “press enter”</b><span>Send the message after it types</span></div><div class="sc-keys"><kbd>voice</kbd></div></div>
+    <div class="sc" data-reveal><div class="sc-desc"><b>Say “backtrack”</b><span>Drop the last sentence, keep the fix</span></div><div class="sc-keys"><kbd>voice</kbd></div></div>
+    <div class="sc" data-reveal><div class="sc-desc"><b>Remap anything</b><span>Bind any accelerator you like</span></div><div class="sc-keys"><kbd>custom</kbd></div></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="band container" id="faq">
+  <div class="section-head center">
+    <span class="eyebrow">questions</span>
+    <h2 class="section-title">Good to know.</h2>
+  </div>
+  <div class="faq">
+    <div class="faq-item"><button class="faq-q">Is my audio uploaded anywhere?<span class="pm">+</span></button><div class="faq-a"><p>Not on the Free plan. Transcription runs on-device with local Whisper, and Privacy Mode stops anything from being written to disk. Cloud speed is strictly opt-in and uses your own API key.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Does it work offline?<span class="pm">+</span></button><div class="faq-a"><p>Yes. The local Whisper engine transcribes without a connection. You only need the internet if you turn on cloud transcription or AI cleanup.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Which apps does it work in?<span class="pm">+</span></button><div class="faq-a"><p>Anywhere there's a text field — Gmail, Word, Google Docs, Slack, Discord, VS Code, Cursor, Notion, Obsidian, Linear, Figma, ChatGPT and more. It types into whatever window has focus.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How accurate is the cleanup?<span class="pm">+</span></button><div class="faq-a"><p>You choose. Cleanup has four levels — from raw transcript, to punctuation only, to filler removal, to a full AI rewrite that matches your style. Say “backtrack” to retract a sentence on the fly.</p></div></div>
+    <div class="faq-item"><button class="faq-q">What languages are supported?<span class="pm">+</span></button><div class="faq-a"><p>Twelve: English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, and Hindi — switchable mid-session from the recording overlay.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is there a Mac version?<span class="pm">+</span></button><div class="faq-a"><p>Super Flow is Windows 10 &amp; 11 today. Mac and mobile are on the roadmap — the download section has a spot to get notified.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ DOWNLOAD / FINAL CTA ============ -->
+<section class="band dark-band final" id="download">
+  <div class="container">
+    <span class="eyebrow">get started</span>
+    <h2 style="margin-top:18px">Ready to stop typing?</h2>
+    <p class="lead">Free forever. No credit card, no account to start. Upgrade later if you want unlimited and cloud speed.</p>
+    <div class="hero-cta">
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary btn-lg">Download for Windows <span class="arr">→</span></a>
+      <a href="#top" class="btn btn-ghost btn-lg">Back to top <span class="arr">↑</span></a>
+    </div>
+    <div class="final-note">Windows 10 &amp; 11 · 70 MB · signed installer · SHA-256 on the releases page · Mac &amp; mobile coming soon</div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><span></span></span> Super&nbsp;Flow</div>
+        <p class="footer-tag">Dictate anywhere on Windows. Polished by AI, private by default.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#top">About</a><a href="https://github.com/man-vu/super-flow-releases">GitHub</a><a href="#download">Download</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="#top">Privacy policy</a><a href="#top">Terms</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Super Flow</span><span>Built for people who'd rather talk.</span></div>
+  </div>
+</footer>
+
+<script is:inline src="demo.js"></script>
+<script is:inline src="site.js"></script>
+</body>
+</html>
