@@ -1,75 +1,151 @@
----
-import Base from '../layouts/Base.astro'
-import PricingTable from '../components/PricingTable.astro'
-import CtaButton from '../components/CtaButton.astro'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Super Flow</title>
+<meta name="description" content="Super Flow is free forever — 2,000 dictated words a week, fully on-device. Pro is $15/month for unlimited words, cloud speed, and AI cleanup.">
+<link rel="icon" type="image/svg+xml" href="/super-flow-web/favicon.svg">
+<link rel="canonical" href="https://manvu.ca/super-flow-web/pricing/">
+<meta property="og:title" content="Pricing — Super Flow">
+<meta property="og:description" content="Free forever on-device, or Pro at $15/month for unlimited words and cloud speed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://manvu.ca/super-flow-web/pricing/">
+<meta property="og:image" content="https://manvu.ca/super-flow-web/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script is:inline>
+  document.documentElement.dataset.motion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/super-flow-web/styles.css">
+</head>
+<body>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-const downloadHref = 'https://github.com/man-vu/super-flow-releases/releases/latest'
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="/super-flow-web/" class="brand" aria-label="Super Flow home">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      Super&nbsp;Flow
+    </a>
+    <nav class="nav">
+      <a href="/super-flow-web/" class="nav-link">Home</a>
+      <a href="/super-flow-web/pricing/" class="nav-link">Pricing</a>
+      <a href="/super-flow-web/faq/" class="nav-link">FAQ</a>
+      <a href="/super-flow-web/about/" class="nav-link">About</a>
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary nav-cta">Download <span class="arr">→</span></a>
+    </nav>
+  </div>
+</header>
 
-const faq = [
-  { q: 'Can I cancel any time?',           a: 'Yes. Pro is month-to-month. Cancel from your billing portal and you keep Pro features until the end of your current period.' },
-  { q: 'Do you offer refunds?',            a: 'Within 14 days of upgrading, email us and we will refund your most recent payment, no questions.' },
-  { q: 'What payment methods?',            a: 'All major credit and debit cards via Stripe. We never see or store your card details.' },
-  { q: 'Is there a team plan?',            a: 'Not yet. If you need 5+ seats for your team, write to us and we will work something out.' },
-]
----
-<Base title="Pricing — Super Flow">
-  <main class="container section">
-    <header class="page-header">
-      <span class="eyebrow">pricing</span>
-      <h1>Free to start. Pro when you need it.</h1>
-      <p>Upgrade when you want cloud transcription, polished AI cleanup, or read-aloud. Cancel anytime.</p>
-    </header>
-
-    <PricingTable />
-
-    <div class="cta-row">
-      <CtaButton href={downloadHref}>Download free</CtaButton>
+<main>
+<section class="band container center">
+  <div class="section-head center" style="text-align:center">
+    <span class="eyebrow">pricing</span>
+    <h1 class="section-title">Free to start.<br>Pro when you need it.</h1>
+    <p class="lead">Start free, fully on-device, no account. Upgrade when you want unlimited words, cloud speed, and AI cleanup. Cancel anytime.</p>
+  </div>
+  <div class="price-grid">
+    <div class="plan" data-reveal>
+      <div class="plan-tag">Free</div>
+      <div class="plan-price">$0 <span class="cy">/ forever</span></div>
+      <ul>
+        <li>2,000 dictated words per week</li>
+        <li>On-device Whisper transcription</li>
+        <li>Rule-based cleanup</li>
+        <li>Dictionary, snippets &amp; Privacy Mode</li>
+      </ul>
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-ghost">Download free <span class="arr">→</span></a>
     </div>
+    <div class="plan plan-pro" data-reveal>
+      <div class="plan-tag">Pro</div>
+      <div class="plan-price">$15 <span class="cy">/ month</span></div>
+      <ul>
+        <li>Unlimited words</li>
+        <li>Cloud speed + AI cleanup (GPT-4o-mini)</li>
+        <li>Meetings, Flow Lens &amp; read-aloud</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary">Start with Pro <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
 
-    <section class="pricing-faq">
-      <span class="eyebrow">common questions</span>
-      <h2>Before you ask.</h2>
-      <dl>
-        {faq.map(item => (
-          <>
-            <dt>{item.q}</dt>
-            <dd>{item.a}</dd>
-          </>
-        ))}
-      </dl>
-    </section>
-  </main>
-</Base>
+<section class="band dark-band">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">side by side</span>
+      <h2 class="section-title">Everything, compared.</h2>
+    </div>
+    <div class="compare">
+      <table>
+        <colgroup><col><col><col class="us-col"></colgroup>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Free</th>
+            <th class="us"><span class="us-head"><span class="brand-mark" aria-hidden="true"><span></span></span> Pro</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Words per week</td><td>2,000</td><td class="us">Unlimited</td></tr>
+          <tr><td>Transcription</td><td>On-device Whisper</td><td class="us">+ Deepgram cloud speed</td></tr>
+          <tr><td>Cleanup</td><td>Rule-based</td><td class="us">AI style transfer (GPT-4o-mini)</td></tr>
+          <tr><td>Meeting transcription</td><td><span class="cross">—</span></td><td class="us"><span class="tick">✓</span></td></tr>
+          <tr><td>Flow Lens (screen-aware assistant)</td><td><span class="cross">—</span></td><td class="us"><span class="tick">✓</span></td></tr>
+          <tr><td>Read-aloud voices</td><td><span class="cross">—</span></td><td class="us"><span class="tick">✓</span></td></tr>
+          <tr><td>Dictionary &amp; snippets</td><td><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span></td></tr>
+          <tr><td>Privacy Mode</td><td><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span></td></tr>
+          <tr><td>Price</td><td>$0</td><td class="us">$15 / month</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-<style>
-  .page-header { margin-bottom: var(--space-5); max-width: 720px; }
-  .page-header p { font-size: 1.05rem; }
-  .cta-row { display: flex; margin-top: var(--space-5); }
-  .pricing-faq { margin-top: var(--space-8); }
-  dl {
-    display: grid;
-    gap: 1px;
-    margin-top: var(--space-4);
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-  dt {
-    background: var(--surface);
-    padding: var(--space-4) var(--space-4) var(--space-2);
-    font-weight: 600;
-    color: var(--text);
-    font-size: 1rem;
-    font-family: var(--font-mono);
-    letter-spacing: -0.01em;
-  }
-  dd {
-    background: var(--surface);
-    margin: 0;
-    padding: 0 var(--space-4) var(--space-4);
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-</style>
+<section class="band container" id="billing-faq">
+  <div class="section-head center">
+    <span class="eyebrow">billing questions</span>
+    <h2 class="section-title">Before you ask.</h2>
+  </div>
+  <div class="faq">
+    <div class="faq-item"><button class="faq-q">Can I cancel any time?<span class="pm">+</span></button><div class="faq-a"><p>Yes. Pro is month-to-month. Cancel from your billing portal and you keep Pro features until the end of your current period.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Do you offer refunds?<span class="pm">+</span></button><div class="faq-a"><p>Within 14 days of upgrading, email us and we will refund your most recent payment, no questions.</p></div></div>
+    <div class="faq-item"><button class="faq-q">What payment methods do you accept?<span class="pm">+</span></button><div class="faq-a"><p>All major credit and debit cards via Stripe. We never see or store your card details.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is there a team plan?<span class="pm">+</span></button><div class="faq-a"><p>Not yet. If you need 5+ seats for your team, write to us and we will work something out.</p></div></div>
+  </div>
+</section>
+
+<section class="band dark-band final">
+  <div class="container">
+    <span class="eyebrow">get started</span>
+    <h2 style="margin-top:18px">Ready to stop typing?</h2>
+    <p class="lead">Free forever. No credit card, no account to start.</p>
+    <div class="hero-cta">
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary btn-lg">Download for Windows <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><span></span></span> Super&nbsp;Flow</div>
+        <p class="footer-tag">Dictate anywhere on Windows. Polished by AI, private by default.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="/super-flow-web/#features">Features</a><a href="/super-flow-web/#privacy">Privacy</a><a href="/super-flow-web/pricing/">Pricing</a><a href="/super-flow-web/faq/">FAQ</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/super-flow-web/about/">About</a><a href="https://github.com/man-vu/super-flow-releases">GitHub</a><a href="/super-flow-web/#download">Download</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="/super-flow-web/privacy/">Privacy policy</a><a href="/super-flow-web/terms/">Terms</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Super Flow</span><span>Built for people who'd rather talk.</span></div>
+  </div>
+</footer>
+
+<script is:inline src="/super-flow-web/site.js"></script>
+</body>
+</html>

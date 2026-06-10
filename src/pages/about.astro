@@ -1,59 +1,94 @@
----
-import Base from '../layouts/Base.astro'
----
-<Base title="About — Super Flow">
-  <main class="container section about">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Super Flow</title>
+<meta name="description" content="Super Flow exists because typing slows down thinking. Press F9, speak, and polished prose lands directly in whatever app you're focused on.">
+<link rel="icon" type="image/svg+xml" href="/super-flow-web/favicon.svg">
+<link rel="canonical" href="https://manvu.ca/super-flow-web/about/">
+<meta property="og:title" content="About — Super Flow">
+<meta property="og:description" content="Typing is the bottleneck. Speaking is the fix.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://manvu.ca/super-flow-web/about/">
+<meta property="og:image" content="https://manvu.ca/super-flow-web/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script is:inline>
+  document.documentElement.dataset.motion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/super-flow-web/styles.css">
+</head>
+<body>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="/super-flow-web/" class="brand" aria-label="Super Flow home">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      Super&nbsp;Flow
+    </a>
+    <nav class="nav">
+      <a href="/super-flow-web/" class="nav-link">Home</a>
+      <a href="/super-flow-web/pricing/" class="nav-link">Pricing</a>
+      <a href="/super-flow-web/faq/" class="nav-link">FAQ</a>
+      <a href="/super-flow-web/about/" class="nav-link">About</a>
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary nav-cta">Download <span class="arr">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="band container">
+  <div class="section-head">
     <span class="eyebrow">about</span>
-    <h1>Typing is the bottleneck.<br />Speaking is the fix.</h1>
+    <h1 class="section-title">Typing is the bottleneck.<br>Speaking is the fix.</h1>
+  </div>
+  <div class="prose" style="margin-top:34px">
+    <p data-reveal>Super Flow exists because typing slows down thinking. The fastest writers we know dictate first and edit second — but every existing tool either ships transcripts full of <em>um</em>, <em>like</em>, and run-on sentences, or leaves you copy-pasting between a recorder and your editor.</p>
+    <p data-reveal>Super Flow puts polished prose directly into whatever app you are focused on. Press <kbd>F9</kbd>, speak, release. The text that appears reads like you wrote it carefully — because behind the scenes we remove fillers, fix grammar, match your tone, and respect the context (code editor vs Slack vs documents).</p>
+    <p data-reveal>We are small, built in the open, and care more about getting out of your way than about adding features. If you have a feature request or a bug, write to us — we read everything.</p>
+  </div>
+  <div class="contact-block" data-reveal>
+    <span class="eyebrow">contact</span>
+    <p class="contact-line">
+      <a href="mailto:hello@superflow.app">hello@superflow.app</a>
+      <span class="sep">·</span>
+      <a href="https://github.com/man-vu/super-flow-releases">github.com/man-vu</a>
+    </p>
+  </div>
+</section>
 
-    <p data-reveal>
-      Super Flow exists because typing slows down thinking. The fastest writers we
-      know dictate first and edit second — but every existing tool either ships
-      transcripts full of <em>um</em>, <em>like</em>, and run-on sentences, or
-      leaves you copy-pasting between a recorder and your editor.
-    </p>
-    <p data-reveal>
-      Super Flow puts polished prose directly into whatever app you are focused on.
-      Press <kbd>F9</kbd>, speak, release. The text that appears reads like you wrote
-      it carefully — because behind the scenes we remove fillers, fix grammar, match
-      your tone, and respect the context (code editor vs Slack vs documents).
-    </p>
-    <p data-reveal>
-      We are small, built in the open, and care more about getting out of your way
-      than about adding features. If you have a feature request or a bug, write to
-      us — we read everything.
-    </p>
-
-    <div class="contact-block" data-reveal>
-      <span class="eyebrow">contact</span>
-      <p class="contact-line">
-        <a href="mailto:hello@superflow.app">hello@superflow.app</a>
-        <span class="sep">·</span>
-        <a href="https://github.com/man-vu/super-flow-releases">github.com/man-vu</a>
-      </p>
+<section class="band dark-band final">
+  <div class="container">
+    <span class="eyebrow">get started</span>
+    <h2 style="margin-top:18px">Ready to stop typing?</h2>
+    <p class="lead">Free forever. No credit card, no account to start.</p>
+    <div class="hero-cta">
+      <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary btn-lg">Download for Windows <span class="arr">→</span></a>
     </div>
-  </main>
-</Base>
+  </div>
+</section>
+</main>
 
-<style>
-  .about { max-width: 720px; }
-  .about > p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: var(--space-4);
-  }
-  .contact-block {
-    margin-top: var(--space-7);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--border);
-  }
-  .contact-line {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    color: var(--text);
-    margin: 0;
-  }
-  .contact-line a { color: var(--accent); }
-  .contact-line a:hover { color: var(--accent-hover); }
-  .sep { color: var(--text-tertiary); margin: 0 8px; }
-</style>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><span></span></span> Super&nbsp;Flow</div>
+        <p class="footer-tag">Dictate anywhere on Windows. Polished by AI, private by default.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="/super-flow-web/#features">Features</a><a href="/super-flow-web/#privacy">Privacy</a><a href="/super-flow-web/pricing/">Pricing</a><a href="/super-flow-web/faq/">FAQ</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/super-flow-web/about/">About</a><a href="https://github.com/man-vu/super-flow-releases">GitHub</a><a href="/super-flow-web/#download">Download</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="/super-flow-web/privacy/">Privacy policy</a><a href="/super-flow-web/terms/">Terms</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Super Flow</span><span>Built for people who'd rather talk.</span></div>
+  </div>
+</footer>
+
+<script is:inline src="/super-flow-web/site.js"></script>
+</body>
+</html>
