@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're Pro — Super Flow</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/super-flow-web/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/super-flow-web/styles.css">
+<script is:inline>
+  // Bounce focus back into the desktop app; the page stays as a fallback.
+  setTimeout(() => { window.location.href = 'super-flow://billing/success' }, 600)
+</script>
+</head>
+<body>
+<main>
+<section class="band container" style="text-align:center; padding-top: clamp(96px, 14vw, 180px)">
+  <span class="eyebrow">payment complete</span>
+  <h1 class="section-title" style="margin-top:18px">You're on Pro. 🎉</h1>
+  <p class="lead" style="max-width:56ch; margin: 22px auto 0">
+    Unlimited words, cloud speed, AI cleanup, meetings, and read-aloud are unlocking
+    in the app right now — switch back to <b>Super Flow</b> and keep talking.
+  </p>
+  <div class="hero-cta" style="margin-top:36px">
+    <a href="super-flow://billing/success" class="btn btn-primary btn-lg">Open Super Flow <span class="arr">→</span></a>
+  </div>
+  <p style="margin-top:22px; font-family: var(--font-mono); font-size: .78rem; color: var(--muted)">
+    Receipt sent by email · manage your plan anytime in Settings → Account
+  </p>
+</section>
+</main>
+</body>
+</html>
