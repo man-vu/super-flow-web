@@ -19,7 +19,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -45,18 +45,28 @@
 
 <main id="top">
 <!-- ============ HERO ============ -->
-<section class="hero container">
+<section class="hero hero-split container">
+  <div class="hero-grid">
+  <div class="hero-copy">
   <span class="hero-kicker"><span class="dot"></span> for anyone who types all day</span>
   <h1 class="display" data-hero-headline>Stop typing.<br><span class="accent">Start talking.</span></h1>
-  <p class="lead" data-hero-sub>Press <kbd>F9</kbd> in any text field — email, doc, Slack, code. Super Flow removes the <em class="hl">ums</em>, fixes the grammar, and types the <em class="hl">clean</em> version straight into whatever app you're in.</p>
+  <p class="lead" data-hero-sub>Press <kbd>F9</kbd> in any app and just speak. Super Flow types the clean, polished version — filler gone, grammar fixed — about <em class="hl">3× faster</em> than you can type.</p>
+  <ul class="hero-checks">
+    <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>≈3× faster</b> than typing — you speak ~150 wpm</span></li>
+    <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Works in <b>every app</b>, right where your cursor is</span></li>
+    <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Cleans up <b>filler &amp; grammar</b> automatically</span></li>
+    <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Private on-device mode</b> — keep everything local</span></li>
+  </ul>
   <div class="hero-cta">
-    <a href="#download" class="btn btn-primary btn-lg">Download for Windows <span class="arr">→</span></a>
+    <a href="#download" class="btn btn-primary btn-lg">Download for Windows — free <span class="arr">→</span></a>
     <a href="#demo" class="btn btn-ghost btn-lg">Watch it work <span class="arr">→</span></a>
   </div>
-  <div class="hero-meta">Windows 10 &amp; 11 · <b>70 MB</b> · signed installer · <b>free forever</b></div>
+  <div class="hero-meta">Windows 10 &amp; 11 · <b>free forever</b> · no account to start</div>
+  <p class="hero-aud">Built for <b>writers, students, support teams &amp; founders</b> — not just developers.</p>
+  </div>
 
   <!-- animated demo -->
-  <div class="demo-wrap" id="demo">
+  <div class="hero-demo" id="demo">
     <div class="demo-window" id="demoWindow">
       <div class="win-bar">
         <div class="win-dots" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -80,6 +90,7 @@
       </div>
     </div>
     <p class="demo-caption">A live mock of the real thing — <b>speak naturally, get polished text in place.</b> No editing, no retyping.</p>
+    </div>
   </div>
 </section>
 
@@ -101,12 +112,12 @@
       <div class="stat-label">faster than typing — you speak ~150 wpm, type ~50</div>
     </div>
     <div class="stat" data-reveal>
-      <div class="stat-value"><span class="pre">&lt;</span><span data-counter="1" data-suffix="s">0s</span></div>
-      <div class="stat-label">from hotkey to polished text in your field</div>
+      <div class="stat-value"><span data-counter="2000" data-suffix="">0</span></div>
+      <div class="stat-label">free dictated words every week — no account needed</div>
     </div>
     <div class="stat" data-reveal>
       <div class="stat-value"><span data-counter="100" data-suffix="%">0%</span></div>
-      <div class="stat-label">on-device on the Free plan — nothing leaves your PC</div>
+      <div class="stat-label">local in on-device mode — your audio stays on your PC</div>
     </div>
   </div>
 </section>
@@ -276,22 +287,22 @@
     <div>
       <span class="eyebrow">privacy &amp; security</span>
       <h2 class="section-title" style="margin-top:18px">Your voice never has to leave your machine.</h2>
-      <p class="lead">On the Free plan, transcription runs entirely on-device with local Whisper. No cloud round-trip, no account required to start.</p>
+      <p class="lead">Switch on on-device mode and transcription runs entirely locally with Whisper — no cloud round-trip. Prefer speed? Use our managed cloud, no API key needed. No account required to start, either way.</p>
       <div class="priv-points">
-        <div class="priv-point"><span class="pn">01</span><div><h3>On-device transcription</h3><p>Local Whisper turns speech into text without the audio ever touching a server.</p></div></div>
+        <div class="priv-point"><span class="pn">01</span><div><h3>On-device mode</h3><p>Choose local Whisper and your speech is transcribed on your machine — the audio never touches a server.</p></div></div>
         <div class="priv-point"><span class="pn">02</span><div><h3>Privacy Mode</h3><p>Flip it on and nothing is written to disk — no history rows, no archived audio. The session leaves no trace.</p></div></div>
-        <div class="priv-point"><span class="pn">03</span><div><h3>You hold the keys</h3><p>Going cloud for speed is opt-in. Bring your own API key — we're not a middleman for your data.</p></div></div>
+        <div class="priv-point"><span class="pn">03</span><div><h3>Managed or your own keys</h3><p>Cloud speed runs on our managed keys out of the box — no signup for an API key. Prefer your own? Plug them in. Or switch to on-device anytime.</p></div></div>
       </div>
     </div>
     <div class="priv-visual">
-      <div class="toggle-row"><div class="tr-label"><b>Privacy Mode</b><span>Don't save history or audio</span></div><div class="switch"></div></div>
-      <div class="toggle-row"><div class="tr-label"><b>Local Whisper</b><span>On-device transcription</span></div><div class="switch"></div></div>
-      <div class="toggle-row"><div class="tr-label"><b>Cloud speed (Deepgram)</b><span>Opt-in, your API key</span></div><div class="switch off"></div></div>
-      <div class="toggle-row"><div class="tr-label"><b>Store recordings</b><span>Keep audio archive on disk</span></div><div class="switch off"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>Cloud speed</b><span>Managed — no API key needed</span></div><div class="switch"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>On-device mode</b><span>Local Whisper, fully offline</span></div><div class="switch off"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>Privacy Mode</b><span>Don't save history or audio</span></div><div class="switch off"></div></div>
+      <div class="toggle-row"><div class="tr-label"><b>Bring your own keys</b><span>Use your own provider keys</span></div><div class="switch off"></div></div>
       <div class="priv-chip-row">
         <span class="priv-chip">No account to start</span>
-        <span class="priv-chip">Local-first</span>
-        <span class="priv-chip">Signed installer</span>
+        <span class="priv-chip">On-device option</span>
+        <span class="priv-chip">Bring your own keys</span>
         <span class="priv-chip">Open releases</span>
       </div>
     </div>
@@ -301,9 +312,9 @@
 <!-- ============ LANGUAGES ============ -->
 <section class="band container center" id="languages">
   <div class="section-head center">
-    <span class="eyebrow">12 languages</span>
+    <span class="eyebrow">multilingual</span>
     <h2 class="section-title">Dictate in your language.<br>Switch mid-sentence.</h2>
-    <p class="lead">Language pills live right in the recording overlay — change transcription language without ever opening Settings.</p>
+    <p class="lead">Auto-detect figures out your language as you speak — or pick one (or auto) right from the recording overlay. On-device Whisper handles dozens of languages.</p>
   </div>
   <div class="lang-grid" data-reveal>
     <div class="lang"><span class="native">A</span><span class="en">English</span></div>
@@ -434,22 +445,21 @@
       <div class="plan-price">$0 <span class="cy">/ forever</span></div>
       <ul>
         <li>2,000 dictated words per week</li>
-        <li>On-device Whisper transcription</li>
-        <li>Rule-based cleanup</li>
-        <li>Dictionary, snippets &amp; Privacy Mode</li>
+        <li>On-device or managed-cloud transcription</li>
+        <li>AI cleanup, dictionary &amp; snippets</li>
+        <li>Meetings, Flow Lens, read-aloud &amp; Privacy Mode</li>
       </ul>
       <a href="#download" class="btn btn-ghost">Download free <span class="arr">→</span></a>
     </div>
     <div class="plan plan-pro" data-reveal>
-      <div class="plan-tag">Pro</div>
+      <div class="plan-tag">Pro · coming soon</div>
       <div class="plan-price">$15 <span class="cy">/ month</span></div>
       <ul>
-        <li>Unlimited words</li>
-        <li>Cloud speed + AI cleanup (GPT-4o-mini)</li>
-        <li>Meetings, Flow Lens &amp; read-aloud</li>
+        <li>Everything in Free</li>
+        <li>Unlimited dictation — no weekly cap</li>
         <li>Priority support</li>
       </ul>
-      <a href="#download" class="btn btn-primary">Start with Pro <span class="arr">→</span></a>
+      <a href="#download" class="btn btn-primary">Get notified <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -477,11 +487,11 @@
     <h2 class="section-title">Good to know.</h2>
   </div>
   <div class="faq">
-    <div class="faq-item"><button class="faq-q">Is my audio uploaded anywhere?<span class="pm">+</span></button><div class="faq-a"><p>Not on the Free plan. Transcription runs on-device with local Whisper, and Privacy Mode stops anything from being written to disk. Cloud speed is strictly opt-in and uses your own API key.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Does it work offline?<span class="pm">+</span></button><div class="faq-a"><p>Yes. The local Whisper engine transcribes without a connection. You only need the internet if you turn on cloud transcription or AI cleanup.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is my audio uploaded anywhere?<span class="pm">+</span></button><div class="faq-a"><p>It can stay entirely on your machine: turn on on-device mode and local Whisper transcribes with nothing uploaded, while Privacy Mode writes nothing to disk. By default Super Flow uses our managed cloud for speed (no API key needed) — switch to on-device, or bring your own keys, anytime.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Does it work offline?<span class="pm">+</span></button><div class="faq-a"><p>Yes — in on-device mode. Local Whisper transcribes with no connection. The default cloud mode needs internet, so switch to on-device for fully offline use.</p></div></div>
     <div class="faq-item"><button class="faq-q">Which apps does it work in?<span class="pm">+</span></button><div class="faq-a"><p>Anywhere there's a text field — Gmail, Word, Google Docs, Slack, Discord, VS Code, Cursor, Notion, Obsidian, Linear, Figma, ChatGPT and more. It types into whatever window has focus.</p></div></div>
-    <div class="faq-item"><button class="faq-q">How accurate is the cleanup?<span class="pm">+</span></button><div class="faq-a"><p>You choose. Cleanup has four levels — from raw transcript, to punctuation only, to filler removal, to a full AI rewrite that matches your style. Say “backtrack” to retract a sentence on the fly.</p></div></div>
-    <div class="faq-item"><button class="faq-q">What languages are supported?<span class="pm">+</span></button><div class="faq-a"><p>Twelve: English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, and Hindi — switchable mid-session from the recording overlay.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How accurate is the cleanup?<span class="pm">+</span></button><div class="faq-a"><p>You choose. Cleanup runs at four levels — from a raw transcript, to light touch-ups, to a standard rewrite, to a full polish that matches your style. Say “backtrack” to retract a sentence on the fly.</p></div></div>
+    <div class="faq-item"><button class="faq-q">What languages are supported?<span class="pm">+</span></button><div class="faq-a"><p>Auto-detect handles your language automatically, and on-device Whisper supports dozens — including English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Russian and more. Pick a language, or auto, right from the recording overlay.</p></div></div>
     <div class="faq-item"><button class="faq-q">Is there a Mac version?<span class="pm">+</span></button><div class="faq-a"><p>Super Flow is Windows 10 &amp; 11 today. Mac and mobile are on the roadmap — the download section has a spot to get notified.</p></div></div>
   </div>
 </section>
@@ -491,12 +501,12 @@
   <div class="container">
     <span class="eyebrow">get started</span>
     <h2 style="margin-top:18px">Ready to stop typing?</h2>
-    <p class="lead">Free forever. No credit card, no account to start. Upgrade later if you want unlimited and cloud speed.</p>
+    <p class="lead">Free forever. No credit card, no account to start. Unlimited dictation (Pro) is coming soon.</p>
     <div class="hero-cta">
       <a href="https://github.com/man-vu/super-flow-releases/releases/latest" class="btn btn-primary btn-lg">Download for Windows <span class="arr">→</span></a>
       <a href="#top" class="btn btn-ghost btn-lg">Back to top <span class="arr">↑</span></a>
     </div>
-    <div class="final-note">Windows 10 &amp; 11 · 70 MB · signed installer · SHA-256 on the releases page · Mac &amp; mobile coming soon</div>
+    <div class="final-note">Windows 10 &amp; 11 · free forever · Mac &amp; mobile coming soon</div>
   </div>
 </section>
 </main>
