@@ -24,6 +24,15 @@
 
   // --- reveal on scroll ---
   var reveals = document.querySelectorAll('[data-reveal]');
+  // stagger grouped siblings so each section flows in as a gentle cascade
+  if (!reduced) {
+    reveals.forEach(function (el) {
+      var p = el.parentElement; if (!p) return;
+      var sibs = p.querySelectorAll(':scope > [data-reveal]');
+      var idx = Array.prototype.indexOf.call(sibs, el);
+      if (idx > 0) el.style.setProperty('--reveal-delay', (Math.min(idx, 6) * 0.07).toFixed(2) + 's');
+    });
+  }
   if ('IntersectionObserver' in window && !reduced) {
     var ro = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -117,5 +126,30 @@
     });
     wrap.addEventListener('mouseleave', function () { win.style.transform = ''; });
     win.style.transition = 'transform .3s ease';
+  }
+
+  // --- smooth scroll (Lenis) — buttery wheel/trackpad inertia; off under reduced-motion ---
+  if (!reduced) {
+    var ls = document.createElement('script');
+    ls.src = '/super-flow-web/lenis.min.js';
+    ls.onload = function () {
+      if (!window.Lenis) return;
+      var lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true });
+      function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      // smooth in-page anchor jumps, clearing the sticky header
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = a.getAttribute('href');
+        if (!id || id.length < 2) return;
+        a.addEventListener('click', function (ev) {
+          var target = document.querySelector(id);
+          if (!target) return;
+          ev.preventDefault();
+          lenis.scrollTo(target, { offset: -84 });
+          if (history.replaceState) history.replaceState(null, '', id);
+        });
+      });
+    };
+    document.body.appendChild(ls);
   }
 })();
