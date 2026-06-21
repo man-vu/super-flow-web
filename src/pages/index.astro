@@ -59,7 +59,7 @@
   </ul>
   <div class="hero-cta">
     <a href="#download" class="btn btn-primary btn-lg">Download for Windows — free <span class="arr">→</span></a>
-    <a href="#demo" class="btn btn-ghost btn-lg">Watch it work <span class="arr">→</span></a>
+    <a href="#watch" class="btn btn-ghost btn-lg">Watch it work <span class="arr">→</span></a>
   </div>
   <div class="hero-meta">Windows 10 &amp; 11 · <b>free forever</b> · no account to start</div>
   <p class="hero-aud">Built for <b>writers, students, support teams &amp; founders</b> — not just developers.</p>
@@ -255,6 +255,44 @@
     </div>
   </div>
 </section>
+
+<!-- ============ SEE IT IN ACTION ============ -->
+<section class="band container" id="watch">
+  <div class="section-head center" style="text-align:center;margin-inline:auto">
+    <span class="eyebrow">see it in action</span>
+    <h2 class="section-title">Watch it work.</h2>
+    <p class="lead">Real flows, about 20 seconds each — turn the sound on.</p>
+  </div>
+  <div class="vid-grid">
+    <figure class="vid" data-reveal>
+      <video class="vid-player" controls preload="none" playsinline poster="videos/poster-dictation.jpg">
+        <source src="videos/sf-dictation.mp4" type="video/mp4">
+      </video>
+      <figcaption class="vid-cap"><b>Speak. It types.</b><span>Press your hotkey, talk, and get polished text in any app.</span></figcaption>
+    </figure>
+    <figure class="vid" data-reveal>
+      <video class="vid-player" controls preload="none" playsinline poster="videos/poster-read-aloud.jpg">
+        <source src="videos/sf-read-aloud.mp4" type="video/mp4">
+      </video>
+      <figcaption class="vid-cap"><b>Hear it back.</b><span>Select any text and have it read aloud — your own voice optional.</span></figcaption>
+    </figure>
+    <figure class="vid" data-reveal>
+      <video class="vid-player" controls preload="none" playsinline poster="videos/poster-your-words.jpg">
+        <source src="videos/sf-your-words.mp4" type="video/mp4">
+      </video>
+      <figcaption class="vid-cap"><b>Your words, your rules.</b><span>Custom dictionary, snippets, and privacy by design.</span></figcaption>
+    </figure>
+  </div>
+</section>
+<style is:global>
+  #watch .vid-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  #watch .vid { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+  #watch .vid-player { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+  #watch .vid-cap { padding: 18px 20px 20px; }
+  #watch .vid-cap b { display: block; font-size: 1.05rem; color: var(--ink); letter-spacing: -0.01em; }
+  #watch .vid-cap span { display: block; margin-top: 5px; font-size: .92rem; line-height: 1.4; color: var(--muted); }
+  @media (max-width: 860px) { #watch .vid-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } }
+</style>
 
 <!-- ============ GALLERY ============ -->
 <section class="band-tight container">
